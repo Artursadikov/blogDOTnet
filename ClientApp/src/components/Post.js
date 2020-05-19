@@ -48,7 +48,7 @@ export default class Post extends Component {
         })
     }
 
-    cancelUploadPostBtn=()=>{
+    cancelUploadPostBtn = () => {
         this.setState({
             comment: !this.state.comment,
             commentArea: !this.state.commentArea
@@ -69,7 +69,7 @@ export default class Post extends Component {
 
 
         return (
-            <li style={{height: commentArea ? '450px' : '300px'}} className="post">
+            <li style={{ height: commentArea ? '450px' : '300px' }} className="post">
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">User name</small>
                 </div>
@@ -83,7 +83,7 @@ export default class Post extends Component {
                     </div>
                 </div>
                 <div className="divActionBtnsContainer">
-                      {/* large screen comments display none on small screen */}
+                    {/* large screen comments display none on small screen */}
                     <div className="divComments">
                         <p>Comments: 12</p>
                         <p>Likes: 235</p>
@@ -95,12 +95,12 @@ export default class Post extends Component {
                         <FontAwesomeIcon style={{ color: like ? 'black' : 'rgb(71, 71, 192)' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
-                <div style={{opacity: commentArea ? '1' : '0'}} className="divCommentArea">
-                    <input type="textarea" className="inputComment"/>
-                    <div className="commentBtnsPost">
-                        <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
-                        <button className="addComment">Comment</button>
-                    </div>
+                <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
+                    <textarea className="inputComment" rows="6" cols="50" name="comment" />
+                        <div className="commentBtnsPost">
+                            <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
+                            <button className="addComment">Comment</button>
+                        </div>
                 </div>
             </li>
         )
