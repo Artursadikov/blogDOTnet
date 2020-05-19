@@ -1,0 +1,101 @@
+.container.blogBody, .row.blogBody {
+    width: auto;
+    height: 100vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.row.blogBody {
+    width: auto;
+    border-radius: 10px;
+}
+
+.blogArea {
+    margin-top: 20px;
+    height: 95vh;
+    border-radius: 5px;
+}
+
+.profileArea {
+    margin-top: 20px;
+    border-radius: 5px;
+    width: auto;
+    height: 50vh;
+    background-color: rgb(243, 242, 242);
+    padding-top: 15px;
+}
+
+
+
+.row.user-pictuar-tag-blog-body {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 1px solid darkblue;
+}
+
+.ulPost {
+    width: auto;
+    height: 320px;
+    list-style: none;
+}
+
+.sideBarUserName {
+    text-align: center;
+    font-weight: 600;
+    color: darkblue;
+}
+
+.sideBarUserEmail {
+    text-align: center;
+    color: darkblue;
+    font-weight: 400;
+}
+
+.profileBtnsEditAndInfo {
+    width: auto;
+    height: 75px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.editProfileBtn {
+    width: 125px;
+    height: 35px;
+    border: 2px solid rgb(118, 170, 187);
+    background-color: transparent;
+    border-radius: 5px;
+    color: darkblue;
+}
+
+.editProfileBtn:hover {
+    background-color: rgb(118, 170, 187);
+    color: white;
+    transition: all ease-in 0.3s;
+}
+
+@media only screen and (max-width: 775px) {
+    .editProfileBtn {
+        width: 125px;
+        font-size: 15px;
+    }
+
+
+}
+
+@media only screen and (max-width: 580px) {
+
+    .profileArea {
+        margin-top: 20px;
+        border-radius: 5px;
+        width: auto;
+        height: 45vh;
+        background-color: rgb(243, 242, 242);
+        padding-top: 15px;
+    }
+    
+}
