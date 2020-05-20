@@ -23,6 +23,8 @@
     height: 50vh;
     background-color: rgb(243, 242, 242);
     padding-top: 15px;
+    border-left: 1px solid rgb(118, 170, 187);
+    border-right: 1px solid rgb(118, 170, 187);
 }
 
 

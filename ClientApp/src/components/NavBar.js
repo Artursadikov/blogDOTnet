@@ -18,6 +18,22 @@ class NavBar extends Component {
         this.props.history.push('/blog-lobby')
     }
 
+    toCreatePost = () => {
+        this.props.history.push('/create-post')
+    }
+
+    toSignup = () => {
+        this.props.history.push('/signup')
+    }
+
+    toHomePage = () => {
+        this.props.history.push('/')
+    }
+
+    goTologinPage=()=>{
+        this.props.history.push('/login')
+    }
+
 
     navToggler = () => {
         this.setState({
@@ -28,17 +44,6 @@ class NavBar extends Component {
 
 
 
-    // componentDidMount() {
-    //     window.addEventListener("resize", this.resize());
-
-    // }
-
-    // resize=()=>{
-
-    //     if (window.innerWidth <= 720) {
-    //         this.setState({ navToggle: true });
-    //     }
-    // }
 
     render() {
 
@@ -52,22 +57,25 @@ class NavBar extends Component {
                 <h1 className="navbar-brand">Blog<em>DOT</em>net</h1>
                 <ul className="navbarUl">
                     <li className="hamburger">
-                        <FontAwesomeIcon style={{color: Toggle ? 'red' : 'darkblue'}} onClick={this.navToggler} className="hamburgerBtn" icon={faCircle} />
+                        <FontAwesomeIcon style={{ color: Toggle ? 'red' : 'darkblue' }} onClick={this.navToggler} className="hamburgerBtn" icon={faCircle} />
                     </li>
                     <li className="navitem">
-                        <button type="button" style={{display: Toggle ? 'inline' : null}} className="NavBtns" >Sign-Up</button>
+                        <button onClick={this.toSignup} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns" >Sign-Up</button>
+                    </li>
+                    {/* <li className="navitem">
+                        <button type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns logout">Log-Out</button>
+                    </li> */}
+                    <li className="navitem">
+                        <button onClick={this.goTologinPage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Log-In</button>
                     </li>
                     <li className="navitem">
-                        <button onClick={this.goToBlogBodyBtn} style={{display: Toggle ? 'inline' : null}} type="button" className="NavBtns">Blog Lobby</button>
+                        <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Lobby</button>
                     </li>
                     <li className="navitem">
-                        <button type="button" style={{display: Toggle ? 'inline' : null}} className="NavBtns">Log-Out</button>
+                        <button onClick={this.toCreatePost} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Create Post</button>
                     </li>
                     <li className="navitem">
-                        <button onClick={()=>this.props.history.push('/')} type="button" style={{display: Toggle ? 'inline' : null}} className="NavBtns">Home</button>
-                    </li>
-                    <li className="navitem">
-                        <button type="button" style={{display: Toggle ? 'inline' : null}} className="NavBtns">empty</button>
+                        <button onClick={this.toHomePage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Home</button>
                     </li>
                 </ul>
             </nav>

@@ -9,6 +9,13 @@
     border-radius: 10px;
 }
 
+.NavBtns.logout:hover{
+    background-color: rgb(226, 80, 12);
+    border: 2px solid rgb(226, 80, 12);
+    color: white;
+    transition: all 0.3s ease-out;
+}
+
 .NavBtns:hover {
     background-color: rgb(118, 170, 187);
     color: white;
@@ -20,6 +27,7 @@
     font-size: 25px;
     font-weight: bolder;
     margin-left: 5px;
+
 }
 
 .navbar {

@@ -6,7 +6,7 @@
     width: 80%;
     height: 300px;
     background-color: rgb(214, 231, 235);
-    border: 3px solid  rgb(118, 170, 187);
+    border: 3px solid rgb(118, 170, 187);
     border-radius: 10px;
     display: flex;
     justify-content: space-evenly;
@@ -16,22 +16,19 @@
 .btnCreateContainer {
     width: 250px;
     height: 225px;
-    
 }
 
 .btnAddCommentContainer {
-
     width: 250px;
     height: 225px;
-  
 }
 
-.createBtnContent{
+.createBtnContent {
     text-align: center;
     margin-top: 5px;
 }
 
-.homePageBtnToPost{
+.homePageBtnToPost {
     width: 100px;
     height: 100px;
     background-color: ivory;
@@ -39,12 +36,34 @@
     margin-right: auto;
     display: block;
     border: 1px solid rgb(118, 170, 187);
-    border-radius: 5px;
+    border-radius: 50%;
     color: darkblue;
-    
+}
+
+.homePageBtnToPost.create {
+    width: 100px;
+    height: 100px;
+    background-color: ivory;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 1px solid rgb(118, 170, 187);
+    border-radius: 50%;
+    color: darkblue;
+    font-size: 40px;
 }
 
 .homePageBtnToPost:hover {
     border: 10px solid rgb(118, 170, 187);
+    font-size: 180%;
     transition: all ease 0.5s;
+}
+
+.brand {
+    font-family: 'Pangolin', cursive;
+    font-size: 55px;
+    font-weight: bolder;
+    color: red;
+    border-radius: 5px;
+    background-color: rgba(64, 179, 224, 0.623);
 }

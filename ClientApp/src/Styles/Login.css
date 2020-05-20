@@ -1,62 +1,35 @@
-.container.login {
-    border: 15px solid rgb(118, 170, 187);
+.container.log {
+    border-left: 1px solid rgb(118, 170, 187);
+    border-right: 1px solid rgb(118, 170, 187);
     border-radius: 5px;
-    background-color: rgb(243, 242, 242);
     width: auto;
-    height: 670px;
-    margin-top: 25px;
-    margin-bottom: 15px;
-}
-
-.row.user-pictuar-tag {
+    background-color: rgb(226, 238, 241);
+    height: 60vh;
+    margin-top: 35px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 1px solid darkblue;
 }
 
-.row.formUserLogin {
+.loginheader {
+    text-align: center;
+    font-weight: bolder;
+    padding-top: 15px;
+}
+
+.row.UserLogin {
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    align-items: center;
     justify-content: center;
+    width: 80%;
+    height: 40vh;
 }
 
-.formSubmitButton {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.formSubBtn {
-    width: 150px;
-    height: 50px;
-    border-radius: 10px;
-    background-color: transparent;
-    border: 2px solid rgb(118, 170, 187);
-    color: darkblue;
-}
-
-.formSubBtn:hover {
-    width: 220px;
-    transition: all 0.5s ease-out;
-}
-
-.formSubBtn:active {
-    width: 220px;
-    background-color: rgb(118, 170, 187);
-    color: white;
-}
-
-
-
-@media only screen and (max-width: 720px) {
-    .row.user-pictuar-tag {
-        width: 100px;
-        height: 100px;
-    }
+.form-group.login {
+    display: block;
+    width: 350px;
+    margin-top: 10px;
+    margin-bottom: 35px;
 }

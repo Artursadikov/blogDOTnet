@@ -12,7 +12,7 @@ export default class BlogBody extends Component {
                     <div className="blogSideBar col-xs-12 col-sm-5 col-lg-4">
                         <div className="profileArea">
                             <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag-blog-body" />
-                            <h3 className="sideBarUserName">User Name</h3>
+                            <h3 className="sideBarUserName">Nickname</h3>
                             <h6 className="sideBarUserEmail">User Email</h6>
                             <div className="profileBtnsEditAndInfo" >
                                 <button className="editProfileBtn">Edit</button>

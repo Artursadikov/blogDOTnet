@@ -71,7 +71,7 @@ export default class Post extends Component {
         return (
             <li style={{ height: commentArea ? '450px' : '300px' }} className="post">
                 <div className="divPostCreator">
-                    <small className="PostCreatorUserName">User name</small>
+                    <small className="PostCreatorUserName">Nickname</small>
                 </div>
                 <div className="divPostContent">
                     <p className="commentTextarea">Post...</p>
@@ -96,7 +96,7 @@ export default class Post extends Component {
                     </div>
                 </div>
                 <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
-                    <textarea className="inputComment" rows="6" cols="50" name="comment" />
+                    <textarea style={{resize: 'none'}} className="inputComment" rows="6" cols="50" name="comment" />
                         <div className="commentBtnsPost">
                             <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
                             <button className="addComment">Comment</button>
