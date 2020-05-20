@@ -16,6 +16,12 @@ import './App.css';
 export default class App extends Component {
 
 
+  componentDidMount() {
+    fetch('http://localhost:5000/api/Post').then(res => {
+      console.log(res)
+    })
+  }
+
   history = createBrowserHistory();
 
   render() {
@@ -24,11 +30,11 @@ export default class App extends Component {
         <div className="App">
           <NavBar />
           <Switch>
-            <Route path='/signup'  component={Signup} />
-            <Route path='/login'  component={Login} />
-            <Route path='/blog-lobby'  component={BlogBody}/>
+            <Route path='/signup' component={Signup} />
+            <Route path='/login' component={Login} />
+            <Route path='/blog-lobby' component={BlogBody} />
             <Route path='/create-post' component={CreatePost} />
-            <Route  path='/' exact component={HomePage} />
+            <Route path='/' exact component={HomePage} />
           </Switch>
         </div>
       </Router>
