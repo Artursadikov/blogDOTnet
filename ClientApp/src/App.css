@@ -11,3 +11,7 @@ html, body{
 button{
     outline: none !important;
 }
+
+textarea, input {
+    color:  rgb(82, 118, 129);
+}

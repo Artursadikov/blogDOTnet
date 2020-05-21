@@ -8,7 +8,6 @@ import '../Styles/Post.css';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -21,7 +20,9 @@ export default class Post extends Component {
         heart: true,
         like: true,
         comment: true,
-        commentArea: false
+        commentArea: false,
+        posts: '',
+        isLoading: true
     }
 
 
@@ -59,6 +60,8 @@ export default class Post extends Component {
 
 
 
+
+
     render() {
 
 
@@ -71,13 +74,13 @@ export default class Post extends Component {
         return (
             <li style={{ height: commentArea ? '450px' : '300px' }} className="post">
                 <div className="divPostCreator">
-                    <small className="PostCreatorUserName">Nickname</small>
+                    <small className="PostCreatorUserName">{this.props.userNickname}</small>
                 </div>
                 <div className="divPostContent">
-                    <p className="commentTextarea">Post...</p>
+                    <p className="commentTextarea">{this.props.postContent}</p>
                     {/* small screen comments display none on large screen */}
                     <div className="divCommentsSmallScreen">
-                        <p>Comments: 12</p>
+                        <p className="commentsInPost">Comments: 12</p>
                         <p>Likes: 235</p>
                         <p>Saved: 25</p>
                     </div>
@@ -85,7 +88,7 @@ export default class Post extends Component {
                 <div className="divActionBtnsContainer">
                     {/* large screen comments display none on small screen */}
                     <div className="divComments">
-                        <p>Comments: 12</p>
+                        <p className="commentsInPost">Comments: 12</p>
                         <p>Likes: 235</p>
                         <p>Saved: 25</p>
                     </div>
@@ -96,11 +99,11 @@ export default class Post extends Component {
                     </div>
                 </div>
                 <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
-                    <textarea style={{resize: 'none'}} className="inputComment" rows="6" cols="50" name="comment" />
-                        <div className="commentBtnsPost">
-                            <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
-                            <button className="addComment">Comment</button>
-                        </div>
+                    <textarea style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
+                    <div className="commentBtnsPost">
+                        <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
+                        <button className="addComment">Comment</button>
+                    </div>
                 </div>
             </li>
         )

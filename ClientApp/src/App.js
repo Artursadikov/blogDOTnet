@@ -16,12 +16,6 @@ import './App.css';
 export default class App extends Component {
 
 
-  componentDidMount() {
-    fetch('http://localhost:5000/api/Post').then(res => {
-      console.log(res)
-    })
-  }
-
   history = createBrowserHistory();
 
   render() {

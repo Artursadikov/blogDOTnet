@@ -25,12 +25,17 @@ namespace postAPI.Controllers
 
 
 
+
+
         //GET:  api/Post
         [HttpGet]
         public ActionResult<IEnumerable<Post>> GetPosts()
         {
             return _context.PostItems;
         }
+
+
+
 
         //GET:  api/Post/n
         [HttpGet("{id}")]
@@ -48,6 +53,8 @@ namespace postAPI.Controllers
         }
 
 
+
+
         //POST:   api/Post
 
         [HttpPost]
@@ -58,6 +65,9 @@ namespace postAPI.Controllers
 
             return CreatedAtAction("GetPostId", new Post { Id = post.Id }, post);
         }
+
+
+
 
 
         //PUT: api/Post
@@ -75,6 +85,9 @@ namespace postAPI.Controllers
 
             return NoContent();
         }
+
+
+
 
         //DELETE:   api/Post/n
 
@@ -99,15 +112,6 @@ namespace postAPI.Controllers
 
 
 
-
-
-
-        // private readonly ILogger<postController> _logger;
-
-        // public postController(ILogger<postController> logger)
-        // {
-        //     _logger = logger;
-        // }
     }
 }
 

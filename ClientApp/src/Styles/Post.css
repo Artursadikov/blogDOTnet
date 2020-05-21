@@ -36,10 +36,22 @@
     overflow: auto;
 }
 
+.commentsInPost:hover {
+    color: blue;
+    text-decoration: underline blue;
+    cursor: pointer;
+}
+
 .divActionBtnsContainer {
     display: flex;
     width: auto;
     height: 65px;
+}
+
+.PostCreatorUserName {
+    font-weight: bolder;
+    text-decoration: underline;
+    margin-left: 10px;
 }
 
 .divActionBtns {
@@ -107,6 +119,7 @@
     margin-right: auto;
     border-radius: 5px;
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
+    padding-left: 10px;
 }
 
 .commentBtnsPost {
@@ -175,12 +188,12 @@
     }
     .commentTextarea {
         height: 150px;
+        padding-left: 10px;
     }
 }
+
 @media only screen and (max-width: 580px) {
-
     .divCommentsSmallScreen p {
-      font-size: 15px;
+        font-size: 15px;
     }
 }
-

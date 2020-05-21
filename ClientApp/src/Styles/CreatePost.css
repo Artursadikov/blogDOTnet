@@ -18,7 +18,7 @@
     text-align: center;
     padding-top: 15px;
     margin-bottom: 5px;
-    padding: 0;
+    padding-top: 8px;
     color: darkblue;
 }
 
@@ -29,6 +29,7 @@
     border-radius: 5px;
     border: 1px solid rgb(118, 170, 187);
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
+    padding-left: 10px;
 }
 
 .createPostBtns {
@@ -68,4 +69,15 @@
     color: white;
     border: 2px solid rgb(255, 217, 0);
     transition: all ease-out 0.3s;
+}
+
+.nickInput {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid rgb(118, 170, 187);
+    box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
+    margin-bottom: 5px;
+    padding-left: 10px;
 }
