@@ -1,0 +1,200 @@
+.post {
+    width: 96%;
+    box-shadow: 10px 12px 17px -9px rgba(98, 167, 186, 1);
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    height: 300px;
+    background-color:  rgb(226, 238, 241);
+    border: 1px solid rgba(98, 167, 186, 1);
+}
+
+.divPostCreator {
+    width: auto;
+    height: 25px;
+    text-align: left;
+    margin-left: 7px;
+}
+
+.divPostContent {
+    width: auto;
+    height: 200px;
+}
+
+.commentTextarea {
+    width: 96%;
+    height: 194px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    display: block;
+    box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
+    border: none;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    overflow: auto;
+}
+
+.commentsInPost:hover {
+    color: blue;
+    text-decoration: underline blue;
+    cursor: pointer;
+}
+
+.divActionBtnsContainer {
+    display: flex;
+    width: auto;
+    height: 65px;
+}
+
+.PostCreatorUserName {
+    font-weight: bolder;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.divActionBtns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40%;
+    height: 65px;
+}
+
+.divComments {
+    width: 60%;
+    height: 65px;
+}
+
+.divComments p {
+    display: block;
+    font-size: small;
+    margin: 0;
+    padding-left: 15px;
+    font-weight: bolder;
+}
+
+.divCommentsSmallScreen p {
+    margin: 0;
+    padding-left: 15px;
+    font-weight: bolder;
+    font-size: 20px;
+    margin: auto;
+    display: none;
+}
+
+.heartREG {
+    font-size: 200%;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.commentREG {
+    font-size: 200%;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.likeREG {
+    font-size: 200%;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    /* color: rgb(71, 71, 192); */
+}
+
+.divCommentArea {
+    width: auto;
+    height: 150px;
+}
+
+.inputComment {
+    width: 96%;
+    height: 90px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
+    padding-left: 10px;
+}
+
+.commentBtnsPost {
+    width: auto;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addComment {
+    width: 130px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid rgb(118, 170, 187);
+    color: darkblue;
+}
+
+.cancelComment {
+    width: 130px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid rgb(118, 170, 187);
+    color: darkblue;
+}
+
+.addComment:hover {
+    background-color: rgb(118, 170, 187);
+    color: white;
+    transition: all ease-out 0.3s;
+}
+
+.cancelComment:hover {
+    background-color: rgb(255, 217, 0);
+    color: white;
+    border: 2px solid rgb(255, 217, 0);
+    transition: all ease-out 0.3s;
+}
+
+@media only screen and (max-width: 720px) {
+    .heartREG {
+        font-size: 250%;
+        margin-left: 15px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    .commentREG {
+        font-size: 250%;
+        margin-left: 15px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    .likeREG {
+        font-size: 250%;
+        margin-left: 15px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    .divComments p {
+        display: none;
+    }
+    .divCommentsSmallScreen p {
+        display: inline;
+    }
+    .commentTextarea {
+        height: 150px;
+        padding-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    .divCommentsSmallScreen p {
+        font-size: 15px;
+    }
+}
