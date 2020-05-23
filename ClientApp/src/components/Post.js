@@ -96,7 +96,22 @@ export default class Post extends Component {
                 {
                     commentListOpen ?
                         <div style={{ opacity: commentListOpen ? '1' : '0' }} className="divCommentArea">
-                            <h1>comments</h1>
+                            <div className="commentListDiv">
+                                <ul className="UlcommentList">
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                    <li className="LIcommentList">comment placeholder</li>
+                                </ul>
+                            </div>
                         </div>
                         :
                         <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">

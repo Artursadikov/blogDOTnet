@@ -16,8 +16,7 @@ export default class BlogBody extends Component {
     state = {
         posts: [],
         isLoading: true,
-        heartPressed: false,
-        likePressed: false
+
     }
 
 
@@ -26,9 +25,14 @@ export default class BlogBody extends Component {
             this.setState({
                 posts: res.data,
                 isLoading: false
+
             })
+            console.log(res.data)
         })
+
     }
+
+
 
 
     async componentDidMount() {
@@ -36,26 +40,26 @@ export default class BlogBody extends Component {
     }
 
     //heart btn // save btn
-    faHeartBtn = (e, id, name, postContent, saved, likes) => {
+    faHeartBtn = (e, id, name, postContent, saved, likes, pressedSD, pressedLK) => {
 
         let icon = e.target.closest('svg');
-        
+
         axios.put(`api/post/${id}`, {
             "id": id,
             "postContent": postContent,
             "userNickname": name,
             "likes": likes,
-            "saved": !this.state.heartPressed ? saved + 1 : saved - 1
+            "saved": pressedSD === false ? saved + 1 : saved - 1,
+            "pressedLK": pressedLK,
+            "pressedSD": pressedSD = !pressedSD
         }).then(() => {
 
-            if (!this.state.heartPressed) {
+            if (pressedSD === true) {
                 icon.style = "color: red"
-            } else if (this.state.heartPressed) {
+            } else if (pressedSD === false) {
                 icon.style = "color: black"
             }
-            this.setState({
-                heartPressed: !this.state.heartPressed
-            })
+
         }).then(() => {
             this.getApi();
         })
@@ -64,7 +68,7 @@ export default class BlogBody extends Component {
 
 
     //like button
-    faThumbsUpBtn = (e, id, name, postContent, saved, likes) => {
+    faThumbsUpBtn = (e, id, name, postContent, saved, likes, pressedLK, pressedSD) => {
 
         let icon = e.target.closest('svg');
 
@@ -73,17 +77,17 @@ export default class BlogBody extends Component {
             "id": id,
             "postContent": postContent,
             "userNickname": name,
-            "likes": !this.state.likePressed ? likes + 1 : likes - 1,
-            "saved": saved
+            "likes": pressedLK === false ? likes + 1 : likes - 1,
+            "saved": saved,
+            "pressedLK": pressedLK = !pressedLK,
+            "pressedSD": pressedSD
         }).then(() => {
-            if (!this.state.likePressed) {
+            if (pressedLK === true) {
                 icon.style = "color: #2980b9"
-            } else if (this.state.likePressed) {
+            } else if (pressedLK === false) {
                 icon.style = "color: black"
             }
-            this.setState({
-                likePressed: !this.state.likePressed
-            })
+
         }).then(() => {
             this.getApi();
         })
@@ -106,8 +110,10 @@ export default class BlogBody extends Component {
                 postContent={post.postContent}
                 likes={post.likes}
                 saved={post.saved}
-                faHeartBtn={(e) => this.faHeartBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes)}
-                faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes)}
+                pressedLK={post.pressedLK}
+                pressedSD={post.pressedSD}
+                faHeartBtn={(e) => this.faHeartBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
+                faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
             />
         })
 

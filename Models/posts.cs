@@ -8,5 +8,7 @@ namespace postAPI.Models
         public string userNickname { get; set; }
         public int likes { get; set; }
         public int saved { get; set; }
+        public bool pressedLK { get; set; }
+        public bool pressedSD { get; set; }
     }
 }
