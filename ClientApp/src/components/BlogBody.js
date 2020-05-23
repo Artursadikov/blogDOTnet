@@ -27,7 +27,7 @@ export default class BlogBody extends Component {
                 isLoading: false
 
             })
-            console.log(res.data)
+          
         })
 
     }
