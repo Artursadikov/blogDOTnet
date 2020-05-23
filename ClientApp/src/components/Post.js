@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/Post.css';
+//import axios from 'axios';
 
 // import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { faComment } from '@fortawesome/free-solid-svg-icons';
@@ -17,38 +18,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Post extends Component {
 
     state = {
-        heart: true,
-        like: true,
         comment: true,
         commentArea: false,
-        posts: '',
-        isLoading: true
+        commentListOpen: false
     }
 
-
-
-    faHeartBtn = () => {
-
+    // comment list open
+    commentList = () => {
         this.setState({
-            heart: !this.state.heart
+            commentListOpen: !this.state.commentListOpen,
+            comment: true,
+            commentArea: false
         })
-
     }
 
+
+    //commment button
     faCommentBtn = () => {
         this.setState({
             comment: !this.state.comment,
-            commentArea: !this.state.commentArea
+            commentArea: !this.state.commentArea,
+            commentListOpen: false
         })
 
     }
 
-    faThumbsUpBtn = () => {
-        this.setState({
-            like: !this.state.like
-        })
-    }
 
+
+    // close comment button
     cancelUploadPostBtn = () => {
         this.setState({
             comment: !this.state.comment,
@@ -61,18 +58,16 @@ export default class Post extends Component {
 
 
 
-
     render() {
 
 
-        const heart = this.state.heart;
-        const like = this.state.like;
+
         const comment = this.state.comment;
         const commentArea = this.state.commentArea;
-
+        const commentListOpen = this.state.commentListOpen;
 
         return (
-            <li style={{ height: commentArea ? '450px' : '300px' }} className="post">
+            <li style={{ height: (commentArea || commentListOpen) ? '450px' : '300px' }} className="post">
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
                 </div>
@@ -80,31 +75,38 @@ export default class Post extends Component {
                     <p className="commentTextarea">{this.props.postContent}</p>
                     {/* small screen comments display none on large screen */}
                     <div className="divCommentsSmallScreen">
-                        <p className="commentsInPost">Comments: 12</p>
-                        <p>Likes: 235</p>
-                        <p>Saved: 25</p>
+                        <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
+                        <p>Likes: {this.props.likes}</p>
+                        <p>Saved:  {this.props.saved}</p>
                     </div>
                 </div>
                 <div className="divActionBtnsContainer">
                     {/* large screen comments display none on small screen */}
                     <div className="divComments">
-                        <p className="commentsInPost">Comments: 12</p>
-                        <p>Likes: 235</p>
-                        <p>Saved: 25</p>
+                        <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
+                        <p>Likes:  {this.props.likes}</p>
+                        <p>Saved:  {this.props.saved}</p>
                     </div>
                     <div className="divActionBtns">
-                        <FontAwesomeIcon style={{ color: heart ? 'black' : 'red' }} onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
+                        <FontAwesomeIcon onClick={this.props.faHeartBtn} className="heartREG" icon={faHeart} />
                         <FontAwesomeIcon style={{ color: comment ? 'black' : 'lightgrey' }} onClick={this.faCommentBtn} className="commentREG" icon={faComment} />
-                        <FontAwesomeIcon style={{ color: like ? 'black' : 'rgb(71, 71, 192)' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
+                        <FontAwesomeIcon onClick={this.props.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
-                <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
-                    <textarea style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
-                    <div className="commentBtnsPost">
-                        <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
-                        <button className="addComment">Comment</button>
-                    </div>
-                </div>
+                {
+                    commentListOpen ?
+                        <div style={{ opacity: commentListOpen ? '1' : '0' }} className="divCommentArea">
+                            <h1>comments</h1>
+                        </div>
+                        :
+                        <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
+                            <textarea style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
+                            <div className="commentBtnsPost">
+                                <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
+                                <button className="addComment">Comment</button>
+                            </div>
+                        </div>
+                }
             </li>
         )
     }
