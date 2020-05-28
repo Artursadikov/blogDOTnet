@@ -7,107 +7,75 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
 using postAPI.Models;
+using Blog.Services;
+using Blog.Models;
 
 namespace postAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class postController : ControllerBase
+    public class PostController : ControllerBase
     {
 
-        private readonly PostContext _context;
 
 
-        public postController(PostContext context)
+        public IPostService _PostService { get; set; }
+
+        public PostController(IPostService postService)
         {
-            _context = context;
+            _PostService = postService;
+
         }
 
 
 
 
-
-        //GET:  api/Post
-        [HttpGet]
-        public ActionResult<IEnumerable<Post>> GetPosts()
+        [HttpGet("getall")]
+        public async Task<IActionResult> Get()
         {
-            return _context.PostItems;
+            return Ok(await _PostService.GetAllPosts());
         }
 
 
-
-
-        //GET:  api/Post/n
         [HttpGet("{id}")]
-
-        public ActionResult<Post> GetPostId(int id)
+        public async Task<IActionResult> GetSingel(int id)
         {
-            var PostId = _context.PostItems.Find(id);
-
-            if (PostId == null)
-            {
-                return NotFound();
-            }
-
-            return PostId;
+            return Ok(await _PostService.GetPostById(id));
         }
 
-
-
-
-        //POST:   api/Post
 
         [HttpPost]
-        public ActionResult<Post> PostNewPost(Post post)
+        public async Task<IActionResult> AddPost(Post newPost)
         {
-            _context.PostItems.Add(post);
-            _context.SaveChanges();
-
-            return CreatedAtAction("GetPostId", new Post { Id = post.Id }, post);
+            return Ok(await _PostService.AddNewPost(newPost));
         }
-
-
-
-
-
-        //PUT: api/Post
 
         [HttpPut("{id}")]
-        public ActionResult PutPostItem(int id, Post post)
+        public async Task<IActionResult> UpdatePost(Post UpdatePost, int id)
         {
-            if (id != post.Id)
+
+            ServiceResponse<Post> responce = await _PostService.UpdatePost(UpdatePost, id);
+
+            if (responce.Data == null)
             {
-                return BadRequest();
+                return NotFound(responce);
             }
 
-            _context.Entry(post).State = EntityState.Modified;
-            _context.SaveChanges();
+            return Ok(responce);
 
-            return NoContent();
         }
 
-
-
-
-        //DELETE:   api/Post/n
-
         [HttpDelete("{id}")]
-
-        public ActionResult<Post> DeletePost(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var PostId = _context.PostItems.Find(id);
+            ServiceResponse<List<Post>> responce = await _PostService.DeletePost(id);
 
-            if (PostId == null)
+            if (responce.Data == null)
             {
-                return NotFound();
+                return NotFound(responce);
             }
 
-            _context.PostItems.Remove(PostId);
-            _context.SaveChanges();
-
-            return PostId;
-
-
+            return Ok(responce);
         }
 
 
@@ -115,5 +83,102 @@ namespace postAPI.Controllers
 }
 
 
+
+
+
+// private readonly PostContext _context;
+
+
+//         public postController(PostContext context)
+//         {
+//             _context = context;
+//         }
+
+
+
+
+
+//         //GET:  api/Post
+//         [HttpGet]
+//         public ActionResult<IEnumerable<Post>> GetPosts()
+//         {
+//             return _context.PostItems;
+//         }
+
+
+
+
+//         //GET:  api/Post/n
+//         [HttpGet("{id}")]
+
+//         public ActionResult<Post> GetPostId(int id)
+//         {
+//             var PostId = _context.PostItems.Find(id);
+
+//             if (PostId == null)
+//             {
+//                 return NotFound();
+//             }
+
+//             return PostId;
+//         }
+
+
+
+
+//         //POST:   api/Post
+
+//         [HttpPost]
+//         public ActionResult<Post> PostNewPost(Post post)
+//         {
+//             _context.PostItems.Add(post);
+//             _context.SaveChanges();
+
+//             return CreatedAtAction("GetPostId", new Post { Id = post.Id }, post);
+//         }
+
+
+
+
+
+//         //PUT: api/Post
+
+//         [HttpPut("{id}")]
+//         public ActionResult PutPostItem(int id, Post post)
+//         {
+//             if (id != post.Id)
+//             {
+//                 return BadRequest();
+//             }
+
+//             _context.Entry(post).State = EntityState.Modified;
+//             _context.SaveChanges();
+
+//             return NoContent();
+//         }
+
+
+
+
+//         //DELETE:   api/Post/n
+
+//         [HttpDelete("{id}")]
+
+//         public ActionResult<Post> DeletePost(int id)
+//         {
+//             var PostId = _context.PostItems.Find(id);
+
+//             if (PostId == null)
+//             {
+//                 return NotFound();
+//             }
+
+//             _context.PostItems.Remove(PostId);
+//             _context.SaveChanges();
+
+//             return PostId;
+
+
+//         }
 
 

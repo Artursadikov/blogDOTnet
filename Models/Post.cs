@@ -1,8 +1,13 @@
 
 
+
+using Blog.Models;
+
 namespace postAPI.Models
 {
-    public class Post {
+    public class Post
+    {
+
         public int Id { get; set; }
         public string PostContent { get; set; }
         public string userNickname { get; set; }
@@ -10,5 +15,7 @@ namespace postAPI.Models
         public int saved { get; set; }
         public bool pressedLK { get; set; }
         public bool pressedSD { get; set; }
+        public User User { get; set; }
+
     }
 }

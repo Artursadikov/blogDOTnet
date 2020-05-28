@@ -21,9 +21,10 @@ export default class BlogBody extends Component {
 
 
     getApi = () => {
-        axios.get('/api/Post').then(res => {
+        axios.get('/api/Post/getall').then(res => {
+         
             this.setState({
-                posts: res.data,
+                posts: res.data.data,
                 isLoading: false
 
             })
@@ -83,7 +84,7 @@ export default class BlogBody extends Component {
             "pressedSD": pressedSD
         }).then(() => {
             if (pressedLK === true) {
-                icon.style = "color: #2980b9"
+                icon.style = "color: #4257f5"
             } else if (pressedLK === false) {
                 icon.style = "color: black"
             }

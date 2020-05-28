@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using postAPI.Models;
 
 namespace Blog.Migrations
 {
     [DbContext(typeof(PostContext))]
-    partial class PostContextModelSnapshot : ModelSnapshot
+    [Migration("20200528143622_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,9 +61,6 @@ namespace Blog.Migrations
                     b.Property<string>("PostContent")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("likes")
                         .HasColumnType("int");
 
@@ -79,16 +78,7 @@ namespace Blog.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("postAPI.Models.Post", b =>
-                {
-                    b.HasOne("Blog.Models.User", "User")
-                        .WithMany("posts")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

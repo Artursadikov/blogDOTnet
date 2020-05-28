@@ -1,8 +1,8 @@
 .container.login {
     border-left: 1px solid rgb(118, 170, 187);
     border-right: 1px solid rgb(118, 170, 187);
-    border-radius: 5px;
-    background-image: linear-gradient(rgba(226, 238, 241, 0.950), rgb(226, 238, 241)), url('../Pic/carbon2.jpg');
+    border-radius: 15px;
+    background-color: rgba(193, 233, 246, 0.5)  ;  
     width: auto;
     height: 670px;
     padding-top: 10px;

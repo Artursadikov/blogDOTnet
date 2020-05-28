@@ -25,17 +25,18 @@
 
 .profileArea {
     margin-top: 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     width: 315px;
     height: 50vh;
     background-color: transparent;
     padding-top: 15px;
     border-left: 1px solid rgb(118, 170, 187);
     border-right: 1px solid rgb(118, 170, 187);
-    background-image: linear-gradient(rgba(226, 238, 241, 0.950), rgb(226, 238, 241)), url('../Pic/carbon2.jpg');
+    background-image: linear-gradient(rgba(226, 238, 241, 0.650), rgba(226, 238, 241, 0.900)), url('../Pic/space.jpg');
     position: fixed;
     margin-left: auto;
     margin-right: auto;
+    background-size: cover;
 }
 
 .row.user-pictuar-tag-blog-body {

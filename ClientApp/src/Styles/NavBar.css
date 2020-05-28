@@ -3,10 +3,11 @@
     margin-right: 10px;
     border: 2px solid rgb(118, 170, 187);
     color: darkblue;
-    background-color: rgb(226, 238, 241);
+    background-color: rgba(226, 238, 241, 0.685);
     width: 130px;
     height: 45px;
     border-radius: 10px;
+   
 }
 
 .NavBtns.logout:hover{
@@ -31,11 +32,11 @@
 }
 
 .navbar {
-    background-image: linear-gradient(rgba(226, 238, 241, 0.950), rgb(226, 238, 241)), url('../Pic/carbon2.jpg');
+    background-color: rgba(193, 233, 246, 0.5)  ;  
     width: auto;
     height: 70px;
     padding: 0;
-
+    box-shadow:0px 1px 1px #1d91de;
 }
 
 .navbarUl {
@@ -83,8 +84,9 @@
         display: inline;
     }
     .navbar {
-        background-color: rgb(226, 238, 241);
+        background-color: rgba(193, 233, 246, 0.5)  ;  
         width: auto;
+        box-shadow:0px 1px 1px #1d91de;
         height: 90px;
         padding: 0;
         position: relative;

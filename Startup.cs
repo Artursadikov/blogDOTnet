@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using postAPI.Models;
+using Blog.Services;
+using Blog.Services.PostService;
+using Blog.Data;
 
 namespace Blog
 {
@@ -26,6 +29,8 @@ namespace Blog
         {
 
             services.AddControllersWithViews();
+            services.AddScoped<IPostService, postService>();
+             services.AddScoped<IAuthRepo, AuthRepo>();
 
             services.AddDbContext<PostContext>
             (opt => opt.UseSqlServer(Configuration["Data:PostAPIConnection:ConnectionString"]));
