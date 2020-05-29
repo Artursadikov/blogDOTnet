@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using Blog.Data;
 using Blog.Dtos;
 using Blog.Models;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase

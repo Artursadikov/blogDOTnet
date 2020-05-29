@@ -11,6 +11,10 @@ using postAPI.Models;
 using Blog.Services;
 using Blog.Services.PostService;
 using Blog.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace Blog
 {
@@ -30,7 +34,20 @@ namespace Blog
 
             services.AddControllersWithViews();
             services.AddScoped<IPostService, postService>();
-             services.AddScoped<IAuthRepo, AuthRepo>();
+            services.AddScoped<IAuthRepo, AuthRepo>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDbContext<PostContext>
             (opt => opt.UseSqlServer(Configuration["Data:PostAPIConnection:ConnectionString"]));
@@ -61,6 +78,8 @@ namespace Blog
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

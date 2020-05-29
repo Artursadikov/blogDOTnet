@@ -1,9 +1,14 @@
 
-
-
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Blog.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using postAPI.Models;
 
 namespace Blog.Data
@@ -11,9 +16,11 @@ namespace Blog.Data
     public class AuthRepo : IAuthRepo
     {
         private readonly PostContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthRepo(PostContext context)
+        public AuthRepo(PostContext context, IConfiguration configuration)
         {
+            _configuration = configuration;
             _context = context;
 
         }
@@ -33,9 +40,9 @@ namespace Blog.Data
                 response.Sucsses = false;
                 response.Message = "Wrong password!";
             }
-            else 
+            else
             {
-                response.Data = user.Id.ToString();
+                response.Data = CreateToken(user);
             }
             return response;
         }
@@ -94,8 +101,34 @@ namespace Blog.Data
                         return false;
                     }
                 }
-                 return true;
+                return true;
             }
+        }
+
+        private string CreateToken(User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name , user.firsName)
+            };
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value)
+            );
+
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }

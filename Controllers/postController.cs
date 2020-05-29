@@ -9,9 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using postAPI.Models;
 using Blog.Services;
 using Blog.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace postAPI.Controllers
 {
+    // need to remove authorize to post a new post or login in front <--
+   // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PostController : ControllerBase
@@ -27,12 +31,13 @@ namespace postAPI.Controllers
 
         }
 
-
-
-
+        // all users can see all the posts
+        [AllowAnonymous]
         [HttpGet("getall")]
         public async Task<IActionResult> Get()
         {
+            // need to add userId to GetAllPosts() + in PostService + in interface-Post to see just a current user posts
+            // int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             return Ok(await _PostService.GetAllPosts());
         }
 
