@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Styles/Post.css';
-//import axios from 'axios';
+import axios from 'axios';
+import Comment from './Comment';
 
 // import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { faComment } from '@fortawesome/free-solid-svg-icons';
@@ -20,15 +21,20 @@ export default class Post extends Component {
     state = {
         comment: true,
         commentArea: false,
-        commentListOpen: false
+        commentListOpen: false,
+        data: [],
+        commentVal: ''
     }
 
-    // comment list open
+    // comment list open and get api
     commentList = () => {
-        this.setState({
-            commentListOpen: !this.state.commentListOpen,
-            comment: true,
-            commentArea: false
+        axios.get("comment/comments").then(res => {
+            this.setState({
+                commentListOpen: !this.state.commentListOpen,
+                comment: true,
+                commentArea: false,
+                data: res.data.data
+            })
         })
     }
 
@@ -43,7 +49,13 @@ export default class Post extends Component {
 
     }
 
-
+    //text area value
+    textareaComments = (e) => {
+        let val = e.target.value;
+        this.setState({
+            commentVal: val
+        })
+    }
 
     // close comment button
     cancelUploadPostBtn = () => {
@@ -53,14 +65,20 @@ export default class Post extends Component {
         })
     }
 
-
-
+    // add a new comment
+    addANewComment = () => {
+        axios.post('Comment', {content: this.state.commentVal}).then(() => {
+            this.commentList();
+        })
+    }
 
 
 
     render() {
 
-
+        let comments = this.state.data.map((item) => {
+            return <Comment Comment={item.content} key={item.id} />
+        });
 
         const comment = this.state.comment;
         const commentArea = this.state.commentArea;
@@ -98,27 +116,16 @@ export default class Post extends Component {
                         <div style={{ opacity: commentListOpen ? '1' : '0' }} className="divCommentArea">
                             <div className="commentListDiv">
                                 <ul className="UlcommentList">
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
-                                    <li className="LIcommentList">comment placeholder</li>
+                                    {comments}
                                 </ul>
                             </div>
                         </div>
                         :
                         <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
-                            <textarea style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
+                            <textarea value={this.state.commentVal} onChange={(e) => this.textareaComments(e)} style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
                             <div className="commentBtnsPost">
                                 <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
-                                <button className="addComment">Comment</button>
+                                <button onClick={this.addANewComment} className="addComment">Comment</button>
                             </div>
                         </div>
                 }

@@ -19,6 +19,31 @@ namespace Blog.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Blog.Models.Comment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Blog.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -82,6 +107,17 @@ namespace Blog.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Blog.Models.Comment", b =>
+                {
+                    b.HasOne("postAPI.Models.Post", "Post")
+                        .WithMany("comment")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Blog.Models.User", "User")
+                        .WithMany("Commen")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("postAPI.Models.Post", b =>

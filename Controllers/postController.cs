@@ -15,7 +15,7 @@ using System.Security.Claims;
 namespace postAPI.Controllers
 {
     // need to remove authorize to post a new post or login in front <--
-   // [Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PostController : ControllerBase
@@ -36,25 +36,25 @@ namespace postAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> Get()
         {
-            // need to add userId to GetAllPosts() + in PostService + in interface-Post to see just a current user posts
             // int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            // return Ok(await _PostService.GetAllPosts(userId));
             return Ok(await _PostService.GetAllPosts());
         }
 
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSingel(int id)
         {
             return Ok(await _PostService.GetPostById(id));
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddPost(Post newPost)
         {
             return Ok(await _PostService.AddNewPost(newPost));
         }
-
+        [AllowAnonymous]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(Post UpdatePost, int id)
         {

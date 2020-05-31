@@ -13,5 +13,7 @@ namespace Blog.Models
         public byte[] passwordHash { get; set; }
         public byte[] passwordSalt { get; set; }
         public List<Post> posts { get; set; }
+        public List<Comment> Commen { get; set; }
+
     }
 }

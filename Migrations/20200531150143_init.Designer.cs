@@ -10,8 +10,8 @@ using postAPI.Models;
 namespace Blog.Migrations
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20200528143622_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200531150143_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace Blog.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Blog.Models.Comment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
 
             modelBuilder.Entity("Blog.Models.User", b =>
                 {
@@ -61,6 +86,9 @@ namespace Blog.Migrations
                     b.Property<string>("PostContent")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("likes")
                         .HasColumnType("int");
 
@@ -78,7 +106,27 @@ namespace Blog.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Blog.Models.Comment", b =>
+                {
+                    b.HasOne("postAPI.Models.Post", "Post")
+                        .WithMany("comment")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Blog.Models.User", "User")
+                        .WithMany("Commen")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("postAPI.Models.Post", b =>
+                {
+                    b.HasOne("Blog.Models.User", "User")
+                        .WithMany("posts")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

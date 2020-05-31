@@ -24,13 +24,13 @@ namespace Blog.Services.PostService
 
         }
 
-        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+       // private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         public async Task<ServiceResponse<List<Post>>> AddNewPost(Post newPost)
         {
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
-            List<Post> dbPost = await _context.Posts.Where(c => c.User.Id == GetUserId()).ToListAsync();
+            List<Post> dbPost = await _context.Posts.ToListAsync();
             // all users CAN POST A NEW POST
-            newPost.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
+           //newPost.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
             await _context.Posts.AddAsync(newPost);
             await _context.SaveChangesAsync();
             serviceResponse.Data = dbPost;
@@ -42,12 +42,12 @@ namespace Blog.Services.PostService
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             try
             {
-                Post post = await _context.Posts.FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+                Post post = await _context.Posts.FirstOrDefaultAsync(c => c.Id == id);
                 if (post != null)
                 {
                     _context.Posts.Remove(post);
                     await _context.SaveChangesAsync();
-                    List<Post> dbPost = await _context.Posts.Where(c => c.User.Id == GetUserId()).ToListAsync();
+                    List<Post> dbPost = await _context.Posts.ToListAsync();
                     serviceResponse.Data = dbPost;
                 }
                 else
@@ -67,12 +67,12 @@ namespace Blog.Services.PostService
         }
 
 
-
+        //  public async Task<ServiceResponse<List<Post>>> GetAllPosts(int userId)
         public async Task<ServiceResponse<List<Post>>> GetAllPosts()
         {
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
-            List<Post> dbPost = await _context.Posts.Where(c => c.User.Id == GetUserId()).ToListAsync();
-            //_context.Posts.Where(c => c.User.Id == userId).ToListAsync(); user can see just his posts
+            List<Post> dbPost = await _context.Posts.ToListAsync();
+            //  List<Post> dbPost = await _context.Posts.Where(c => c.User.Id == userId).ToListAsync();
             serviceResponse.Data = dbPost;
             return serviceResponse;
         }
@@ -80,7 +80,7 @@ namespace Blog.Services.PostService
         public async Task<ServiceResponse<Post>> GetPostById(int id)
         {
             ServiceResponse<Post> serviceResponse = new ServiceResponse<Post>();
-            Post dbPost = await _context.Posts.FirstOrDefaultAsync(c => c.Id == id && c.User.Id == GetUserId());
+            Post dbPost = await _context.Posts.FirstOrDefaultAsync(c => c.Id == id);
             serviceResponse.Data = dbPost;
             return serviceResponse;
         }
@@ -90,9 +90,8 @@ namespace Blog.Services.PostService
             ServiceResponse<Post> serviceResponse = new ServiceResponse<Post>();
             try
             {
-                Post post = await _context.Posts.Include(c => c.User).FirstOrDefaultAsync(c => c.Id == UpdatedPost.Id);
-                if (post.User.Id == GetUserId())
-                {
+                Post post = await _context.Posts.FirstOrDefaultAsync(c => c.Id == UpdatedPost.Id);
+
                     post.PostContent = UpdatedPost.PostContent;
                     post.likes = UpdatedPost.likes;
                     post.pressedLK = UpdatedPost.pressedLK;
@@ -104,12 +103,7 @@ namespace Blog.Services.PostService
                     await _context.SaveChangesAsync();
 
                     serviceResponse.Data = post;
-                }
-                else
-                {
-                    serviceResponse.Sucsses = false;
-                    serviceResponse.Message = "Post not found!";
-                }
+           
 
             }
 

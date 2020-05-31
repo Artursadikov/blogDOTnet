@@ -22,7 +22,7 @@ export default class BlogBody extends Component {
 
     getApi = () => {
         axios.get('/api/Post/getall').then(res => {
-         
+
             this.setState({
                 posts: res.data.data,
                 isLoading: false

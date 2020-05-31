@@ -35,6 +35,7 @@ namespace Blog
             services.AddControllersWithViews();
             services.AddScoped<IPostService, postService>();
             services.AddScoped<IAuthRepo, AuthRepo>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
