@@ -1,0 +1,76 @@
+.container.register {
+    border: 2px darkblue solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 670px;
+    height: 100vh;
+    border-radius: 10px;
+    padding: 0;
+    background-color: rgba(193, 233, 246, 0.5); 
+
+}
+
+.registerHeadre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginSection {
+    width: 335px;
+    height: 50px;
+    border-right: 1px darkblue solid;
+    display: inline-block;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.registerSection {
+    width: 335px;
+    height: 50px;
+    border-left: 1px darkblue solid;
+    display: inline-block;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 580px) {
+    .container.register {
+        border: 2px darkblue solid;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 380px;
+        height: 100vh;
+        border-radius: 10px;
+        padding: 0;
+
+    }
+
+    .loginSection {
+        width: 190px;
+        height: 50px;
+        border-right: 1px darkblue solid;
+        display: inline-block;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    
+    .registerSection {
+        width: 190px;
+        height: 50px;
+        border-left: 1px darkblue solid;
+        display: inline-block;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+
+
+}

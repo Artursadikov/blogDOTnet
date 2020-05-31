@@ -22,17 +22,14 @@ class NavBar extends Component {
         this.props.history.push('/create-post')
     }
 
-    toSignup = () => {
-        this.props.history.push('/signup')
+    goToRegisterPage = () => {
+        this.props.history.push('/register')
     }
 
     toHomePage = () => {
         this.props.history.push('/')
     }
 
-    goTologinPage=()=>{
-        this.props.history.push('/login')
-    }
 
 
     navToggler = () => {
@@ -60,13 +57,7 @@ class NavBar extends Component {
                         <FontAwesomeIcon style={{ color: Toggle ? 'red' : 'darkblue' }} onClick={this.navToggler} className="hamburgerBtn" icon={faCircle} />
                     </li>
                     <li className="navitem">
-                        <button onClick={this.toSignup} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns" >Sign-Up</button>
-                    </li>
-                    {/* <li className="navitem">
-                        <button type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns logout">Log-Out</button>
-                    </li> */}
-                    <li className="navitem">
-                        <button onClick={this.goTologinPage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Log-In</button>
+                        <button onClick={this.goToRegisterPage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Registration</button>
                     </li>
                     <li className="navitem">
                         <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Lobby</button>

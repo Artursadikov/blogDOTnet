@@ -1,9 +1,7 @@
 .container.log {
-    border-left: 1px solid rgb(118, 170, 187);
-    border-right: 1px solid rgb(118, 170, 187);
-    border-radius: 15px;
+
     width: auto;
-    background-color: rgba(193, 233, 246, 0.5);  
+    
     height: 60vh;
     margin-top: 35px;
     margin-left: auto;

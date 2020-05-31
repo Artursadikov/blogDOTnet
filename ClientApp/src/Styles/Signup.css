@@ -1,8 +1,7 @@
 .container.login {
-    border-left: 1px solid rgb(118, 170, 187);
-    border-right: 1px solid rgb(118, 170, 187);
+
     border-radius: 15px;
-    background-color: rgba(193, 233, 246, 0.5)  ;  
+
     width: auto;
     height: 670px;
     padding-top: 10px;
@@ -13,10 +12,10 @@
 .row.user-pictuar-tag {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    width: 180px;
-    height: 180px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     border: 1px solid darkblue;
 }

@@ -7,6 +7,7 @@ import BlogBody from './components/BlogBody';
 import HomePage from './components/HomePage';
 import CreatePost from './components/CreatePost';
 import Login from './components/Login';
+import Register from "./components/Register";
 
 import './App.css';
 
@@ -29,6 +30,7 @@ export default class App extends Component {
             <Route path='/blog-lobby' component={BlogBody} />
             <Route path='/create-post' component={CreatePost} />
             <Route path='/' exact component={HomePage} />
+            <Route path="/register" component={Register} />
           </Switch>
         </div>
       </Router>
