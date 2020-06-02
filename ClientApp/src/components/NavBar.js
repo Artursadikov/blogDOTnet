@@ -15,21 +15,13 @@ class NavBar extends Component {
 
 
     goToBlogBodyBtn = () => {
-        this.props.history.push('/blog-lobby')
+        this.props.history.push('/')
     }
 
-    toCreatePost = () => {
-        this.props.history.push('/create-post')
-    }
 
     goToRegisterPage = () => {
         this.props.history.push('/register')
     }
-
-    toHomePage = () => {
-        this.props.history.push('/')
-    }
-
 
 
     navToggler = () => {
@@ -50,7 +42,7 @@ class NavBar extends Component {
 
         return (
 
-            <nav style={{ height: !Toggle ? '80px' : '350px' }} className="navbar">
+            <nav style={{ height: !Toggle ? '80px' : '300px' }} className="navbar">
                 <h1 className="navbar-brand">Blog<em>DOT</em>net</h1>
                 <ul className="navbarUl">
                     <li className="hamburger">
@@ -61,12 +53,6 @@ class NavBar extends Component {
                     </li>
                     <li className="navitem">
                         <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Lobby</button>
-                    </li>
-                    <li className="navitem">
-                        <button onClick={this.toCreatePost} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Create Post</button>
-                    </li>
-                    <li className="navitem">
-                        <button onClick={this.toHomePage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Home</button>
                     </li>
                 </ul>
             </nav>

@@ -4,6 +4,8 @@ import Post from './Post';
 import '../Styles/blogBody.css';
 import axios from 'axios';
 import Loader from '../Loader/Loader';
+import Modal from '../Modal/Modal';
+import NewPostCreateModal from './NewPostCreateModal';
 
 
 
@@ -16,29 +18,84 @@ export default class BlogBody extends Component {
     state = {
         posts: [],
         isLoading: true,
-
+        showModal: false,
+        inputValue: '',
+        textareaValue: '',
+        error: false
     }
 
 
     getApi = () => {
-        axios.get('/api/Post/getall').then(res => {
+        axios.get('/api/Post').then(res => {
 
             this.setState({
                 posts: res.data.data,
                 isLoading: false
 
             })
-          
         })
+    }
 
+    //Open modal create new post
+    CreateANewPostBtn = () => {
+        this.setState({
+            showModal: true
+        })
+    }
+
+    cancelPostbtn = () => {
+        this.setState({
+            showModal: false
+        })
     }
 
 
+    //input value handler
+    inputNickVal = (e) => {
+      let val = e.target.value;
+        this.setState({
+            inputValue: val
+        })
+    }
+
+    //textarea value handler
+    textareaVal = (e) => {
+        let val = e.target.value;
+        this.setState({
+            textareaValue: val
+        })
+    }
+
+
+    //post a new post
+    post = () => {
+
+        axios.post('api/Post', {
+            postContent: this.state.textareaValue,
+            userNickname: this.state.inputValue
+        }).then(() => {
+            this.setState({
+                textareaValue: "",
+                inputValue: "",
+                showModal: false
+            })
+        }).then(() => {
+            this.getApi();
+        })
+        .catch(e => {
+            this.setState({
+                error: true
+            })
+            //console log error from server
+            console.log(e);
+        })
+    }
 
 
     async componentDidMount() {
         await this.getApi();
     }
+
 
     //heart btn // save btn
     faHeartBtn = (e, id, name, postContent, saved, likes, pressedSD, pressedLK) => {
@@ -124,6 +181,14 @@ export default class BlogBody extends Component {
 
         return (
             <div className="container blogBody">
+                <Modal show={this.state.showModal}>
+                    <NewPostCreateModal
+                        cancelPostbtn={this.cancelPostbtn}
+                        onChengeinputNickVal={(e) => this.inputNickVal(e)}
+                        onChengetextareaVal={(e) => this.textareaVal(e)}
+                        post={this.post}
+                    />
+                </Modal>
                 <div className="row blogBody">
                     <div className="blogSideBar col-xs-12 col-sm-5 col-lg-4">
                         <div className="profileArea">
@@ -133,7 +198,9 @@ export default class BlogBody extends Component {
                             <div className="profileBtnsEditAndInfo" >
                                 <button className="editProfileBtn">Edit</button>
                                 <button className="editProfileBtn">My Posts Info</button>
+
                             </div>
+                            <button onClick={this.CreateANewPostBtn} className="createNewPostBtn">Add A New Post</button>
                         </div>
                     </div>
                     <div className="blogMain col-xs-12 col-sm-7 col-lg-8">
@@ -142,15 +209,6 @@ export default class BlogBody extends Component {
                                 {
                                     this.state.isLoading ?
                                         <Loader />
-                                        :
-                                        null
-                                }
-                                {
-                                    this.state.posts.length === 0 ?
-                                        <div>
-                                            <h1 style={{ display: 'inline', backgroundColor: 'lightgrey', borderRadius: '5px' }}>No Posts...</h1>
-                                            <small style={{ display: 'block', textDecoration: 'underline', marginLeft: '5px' }}>Go To Create Post</small>
-                                        </div>
                                         :
                                         null
                                 }

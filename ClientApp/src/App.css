@@ -1,19 +1,19 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
-html, body{
-    background-image: linear-gradient(rgba(226, 238, 241, 0.8), rgba(226, 238, 241, 0.8)) ,url('./Pic/space.jpg');
-    /* background-repeat: no-repeat; */
+
+html, body {
+    background: -webkit-linear-gradient(left, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%);
     background-size: cover;
 }
 
-button{
+button {
     outline: none !important;
 }
 
 textarea, input {
-    color:  rgb(82, 118, 129);
+    color: rgb(82, 118, 129);
 }

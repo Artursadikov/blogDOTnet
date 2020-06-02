@@ -18,25 +18,50 @@
 }
 
 .blogSideBar.col-xs-12.col-sm-5.col-lg-4 {
-
     padding-left: 0;
     padding-right: 0;
 }
 
 .profileArea {
     margin-top: 20px;
+    margin-bottom: 15px;
     border-radius: 15px;
     width: 315px;
-    height: 50vh;
+    height: 65vh;
     background-color: transparent;
     padding-top: 15px;
-    border-left: 1px solid rgb(118, 170, 187);
-    border-right: 1px solid rgb(118, 170, 187);
-    background-image: linear-gradient(rgba(226, 238, 241, 0.650), rgba(226, 238, 241, 0.900)), url('../Pic/space.jpg');
+    border-left: 3px solid rgb(118, 170, 187);
+    border-right: 3px solid rgb(118, 170, 187);
+    border-top: 1px solid rgb(118, 170, 187);
+    border-bottom: 1px solid rgb(118, 170, 187);
+    /* background-image: linear-gradient(rgba(226, 238, 241, 0.650), rgba(226, 238, 241, 0.900)), url('../Pic/space.jpg'); */
     position: fixed;
     margin-left: auto;
     margin-right: auto;
-    background-size: cover;
+
+   
+}
+
+.createNewPostBtn {
+    border-radius: 10px;
+    width: 280px;
+    height: 50px;
+    border: 2px solid rgb(118, 170, 187);
+    color: darkblue;
+    background-color: transparent;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+
+.createNewPostBtn:hover {
+    color: white;
+    background-color: rgb(255, 217, 0);
+    transition: all ease-out 0.3s;
 }
 
 .row.user-pictuar-tag-blog-body {
@@ -102,15 +127,26 @@
         position: relative;
         width: auto;
     }
+    .createNewPostBtn {
+        width: 205px;
+        display: block;
+    }
 }
+
 
 @media only screen and (max-width: 580px) {
     .profileArea {
         margin-top: 20px;
-        border-radius: 5px;
+        border-radius: 15px;
         width: auto;
-        height: 45vh;
-        background-color: rgb(243, 242, 242);
+        height: 55vh;
+        /* background-color: rgb(243, 242, 242); */
         padding-top: 15px;
     }
+
+    .createNewPostBtn {
+        width: 340px;
+        display: block;
+    }
+    
 }

@@ -4,15 +4,13 @@ import Signup from './components/Signup';
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import BlogBody from './components/BlogBody';
-import HomePage from './components/HomePage';
-import CreatePost from './components/CreatePost';
 import Login from './components/Login';
 import Register from "./components/Register";
 
 import './App.css';
 
 
-///Intro to Azure DevOps - Source Control, CI/CD, Automation, and more
+
 
 export default class App extends Component {
 
@@ -27,9 +25,7 @@ export default class App extends Component {
           <Switch>
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={Login} />
-            <Route path='/blog-lobby' component={BlogBody} />
-            <Route path='/create-post' component={CreatePost} />
-            <Route path='/' exact component={HomePage} />
+            <Route path='/' exact component={BlogBody} />
             <Route path="/register" component={Register} />
           </Switch>
         </div>

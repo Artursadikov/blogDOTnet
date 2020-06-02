@@ -33,7 +33,7 @@ namespace postAPI.Controllers
 
         // all users can see all the posts
         [AllowAnonymous]
-        [HttpGet("getall")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             // int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
@@ -48,12 +48,16 @@ namespace postAPI.Controllers
             return Ok(await _PostService.GetPostById(id));
         }
 
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddPost(Post newPost)
         {
             return Ok(await _PostService.AddNewPost(newPost));
         }
+
+
+
         [AllowAnonymous]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePost(Post UpdatePost, int id)
@@ -70,6 +74,7 @@ namespace postAPI.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

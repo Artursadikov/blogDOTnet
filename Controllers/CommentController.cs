@@ -21,6 +21,8 @@ namespace Blog.Controllers
             _commentService = commentService;
         }
 
+        
+
         // all users can see all the comments
         [AllowAnonymous]
         [HttpGet("comments")]
