@@ -76,7 +76,7 @@ export default class Post extends Component {
     }
 
     //delete a comment
-    deleteCommentBtn = (e, id) => {
+    deleteCommentBtn = (id) => {
         axios.delete(`Comment/${id}`).then(() => {
             axios.get("comment/comments").then(res => {
                 this.setState({
@@ -91,11 +91,12 @@ export default class Post extends Component {
 
     render() {
 
+        // comments list
         let comments = this.state.data.map((item) => {
             return <Comment class={item.id % 2 === 0 ? "commentLI" : "commentLI2"}
                 Comment={item.content}
                 key={item.id}
-                deleteCommentBtn={(e, id) => this.deleteCommentBtn(e, item.id)} />
+                deleteCommentBtn={(id) => this.deleteCommentBtn(item.id)} />
         });
 
         const comment = this.state.comment;
@@ -106,6 +107,7 @@ export default class Post extends Component {
             <li style={{ height: (commentArea || commentListOpen) ? '550px' : '300px' }} className="post">
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
+                    <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
                 </div>
                 <div className="divPostContent">
                     <p className="commentTextarea">{this.props.postContent}</p>

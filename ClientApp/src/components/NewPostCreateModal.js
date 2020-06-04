@@ -20,7 +20,7 @@ class NewPostCreateModal extends Component {
                 <div className="createPostBtnDiv">
                     <button onClick={this.props.cancelPostbtn} className="createPostCancelBtn">Cancel</button>
                     {
-                        this.props.inputValue === '' || this.props.textareaVal === "" ?
+                        this.props.inputValue === '' || this.props.textareaValue === "" ?
                             <button disabled style={{ opacity: '0.5' }} className="createPostPostBtn">Post</button>
                             :
                             <button onClick={this.props.post} className="createPostPostBtn">Post</button>

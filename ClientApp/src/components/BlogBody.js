@@ -52,7 +52,7 @@ export default class BlogBody extends Component {
 
     //input value handler
     inputNickVal = (e) => {
-      let val = e.target.value;
+        let val = e.target.value;
         this.setState({
             inputValue: val
         })
@@ -75,20 +75,20 @@ export default class BlogBody extends Component {
             userNickname: this.state.inputValue
         }).then(() => {
             this.setState({
-                textareaValue: "",
-                inputValue: "",
+                inputValue: '',
+                textareaValue: '',
                 showModal: false
             })
         }).then(() => {
             this.getApi();
         })
-        .catch(e => {
-            this.setState({
-                error: true
+            .catch(e => {
+                this.setState({
+                    error: true
+                })
+                //console log error from server
+                console.log(e);
             })
-            //console log error from server
-            console.log(e);
-        })
     }
 
 
@@ -151,7 +151,13 @@ export default class BlogBody extends Component {
         })
     }
 
-
+    //delete post button
+    deletePostBtn = (id) => {
+        axios.delete(`api/Post/${id}`).then(() => {
+            this.getApi();
+        })
+        console.log(id)
+    }
 
 
 
@@ -161,7 +167,7 @@ export default class BlogBody extends Component {
 
 
         let Posts = this.state.posts.map(post => {
-            const { id } = post;
+
             return <Post
                 key={post.id}
                 userNickname={post.userNickname}
@@ -170,8 +176,9 @@ export default class BlogBody extends Component {
                 saved={post.saved}
                 pressedLK={post.pressedLK}
                 pressedSD={post.pressedSD}
-                faHeartBtn={(e) => this.faHeartBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
-                faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
+                deletePostBtn={() => this.deletePostBtn(post.id)}
+                faHeartBtn={(e) => this.faHeartBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
+                faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
             />
         })
 
@@ -186,6 +193,8 @@ export default class BlogBody extends Component {
                         cancelPostbtn={this.cancelPostbtn}
                         onChengeinputNickVal={(e) => this.inputNickVal(e)}
                         onChengetextareaVal={(e) => this.textareaVal(e)}
+                        inputValue={this.state.inputValue}
+                        textareaValue={this.state.textareaValue}
                         post={this.post}
                     />
                 </Modal>
