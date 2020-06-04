@@ -104,7 +104,7 @@ export default class Post extends Component {
         const commentListOpen = this.state.commentListOpen;
 
         return (
-            <li style={{ height: (commentArea || commentListOpen) ? '550px' : '300px' }} className="post">
+            <li className={(commentArea || commentListOpen) ? "post2" : "post"}>
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
                     <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
@@ -133,7 +133,7 @@ export default class Post extends Component {
                 </div>
                 {
                     commentListOpen ?
-                        <div style={{ opacity: commentListOpen ? '1' : '0' }} className="divCommentArea">
+                        <div className={ commentListOpen ?"divCommentArea": "divCommentArea2"}>
                             <div className="commentListDiv">
                                 <ul className="UlcommentList">
                                     {comments}
@@ -141,7 +141,7 @@ export default class Post extends Component {
                             </div>
                         </div>
                         :
-                        <div style={{ opacity: commentArea ? '1' : '0' }} className="divCommentArea">
+                        <div className={ commentArea ? "divCommentArea": "divCommentArea2"}>
                             <textarea value={this.state.commentVal} onChange={(e) => this.textareaComments(e)} style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
                             <div className="commentBtnsPost">
                                 <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>

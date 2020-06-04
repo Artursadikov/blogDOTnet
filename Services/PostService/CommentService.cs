@@ -62,7 +62,6 @@ namespace Blog.Services.PostService
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
             List<Comment> dbComments = await _context.Comments.ToListAsync();
-            //  List<Comment> dbComment = await _context.Comment.Where(c => c.User.Id == userId).ToListAsync();
             Response.Data = dbComments;
             return Response;
         }
