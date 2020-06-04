@@ -115,7 +115,7 @@
 
 .inputComment {
     width: 96%;
-    height: 90px;
+    height: 200px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -167,7 +167,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 96%;
-    height: 140px;
+    height: 230px;
     border-radius: 5px;
     background-color: rgb(245, 245, 245);
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
@@ -177,17 +177,11 @@
     margin-left: auto;
     margin-right: auto;
     width: 94%;
-    height: 140px;
+    height: 230px;
     list-style: none;
     overflow-y: auto;
-    
-}
-
-.LIcommentList{
-    padding-left: 5px;
-    font-size: 80%;
-    font-weight: bolder;
-    color: darkblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 720px) {

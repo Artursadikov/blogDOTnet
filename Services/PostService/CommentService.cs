@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Blog.Models;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,6 @@ namespace Blog.Services.PostService
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
             List<Comment> dbComment = await _context.Comments.ToListAsync();
-           // newComment.Post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
             await _context.Comments.AddAsync(newComment);
             await _context.SaveChangesAsync();
 

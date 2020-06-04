@@ -21,7 +21,7 @@ namespace Blog.Controllers
             _commentService = commentService;
         }
 
-        
+
 
         // all users can see all the comments
         [AllowAnonymous]
@@ -63,7 +63,7 @@ namespace Blog.Controllers
 
         }
 
-
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

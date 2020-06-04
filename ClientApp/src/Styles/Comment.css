@@ -1,0 +1,56 @@
+.LIcommentList {
+    font-size: 80%;
+    font-weight: bolder;
+    color: darkblue;
+    padding: 5px;
+    width: auto;
+    height: 100px;
+    max-width: 500px;
+    word-wrap: break-word;
+}
+
+
+
+.btnEditDelDiv {
+    display: flex;
+    float: right;
+}
+
+.commentLI {
+
+    width: auto;
+    height: 100px;
+    overflow: auto;
+}
+.commentLI2{
+    width: auto;
+    height: 100px;
+    overflow: auto;
+    background-color: rgb(226, 224, 224);
+}
+
+.commentBtnEdit {
+    width: 50px;
+    height: 25px;
+    display: block;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: darkgray;
+    color: white;
+    margin-top: 25px;
+}
+
+.commentBtnDelete {
+    width: 50px;
+    height: 25px;
+    display: block;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: orangered;
+    color: white;
+    margin-top: 25px;
+}

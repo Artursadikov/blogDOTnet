@@ -3,6 +3,7 @@ import '../Styles/Post.css';
 import axios from 'axios';
 import Comment from './Comment';
 
+
 // import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { faComment } from '@fortawesome/free-solid-svg-icons';
 // import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +25,7 @@ export default class Post extends Component {
         commentListOpen: false,
         data: [],
         commentVal: ''
+
     }
 
     // comment list open and get api
@@ -37,6 +39,7 @@ export default class Post extends Component {
             })
         })
     }
+
 
 
     //commment button
@@ -67,17 +70,32 @@ export default class Post extends Component {
 
     // add a new comment
     addANewComment = () => {
-        axios.post('Comment', {content: this.state.commentVal}).then(() => {
+        axios.post('Comment', { content: this.state.commentVal }).then(() => {
             this.commentList();
         })
     }
 
+    //delete a comment
+    deleteCommentBtn = (e, id) => {
+        axios.delete(`Comment/${id}`).then(() => {
+            axios.get("comment/comments").then(res => {
+                this.setState({
+                    comment: true,
+                    commentArea: false,
+                    data: res.data.data
+                })
+            })
+        })
+    }
 
 
     render() {
 
         let comments = this.state.data.map((item) => {
-            return <Comment Comment={item.content} key={item.id} />
+            return <Comment class={item.id % 2 === 0 ? "commentLI" : "commentLI2"}
+                Comment={item.content}
+                key={item.id}
+                deleteCommentBtn={(e, id) => this.deleteCommentBtn(e, item.id)} />
         });
 
         const comment = this.state.comment;
@@ -85,7 +103,7 @@ export default class Post extends Component {
         const commentListOpen = this.state.commentListOpen;
 
         return (
-            <li style={{ height: (commentArea || commentListOpen) ? '450px' : '300px' }} className="post">
+            <li style={{ height: (commentArea || commentListOpen) ? '550px' : '300px' }} className="post">
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
                 </div>
