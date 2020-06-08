@@ -4,10 +4,6 @@ import axios from 'axios';
 import Comment from './Comment';
 
 
-// import { faHeart } from '@fortawesome/free-solid-svg-icons';
-// import { faComment } from '@fortawesome/free-solid-svg-icons';
-// import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
@@ -140,6 +136,8 @@ export default class Post extends Component {
         const comment = this.state.comment;
         const commentArea = this.state.commentArea;
         const commentListOpen = this.state.commentListOpen;
+
+        
 
         return (
             <li className={(commentArea || commentListOpen) ? "post2" : "post"}>

@@ -1,9 +1,10 @@
 .NavBtns {
     margin-left: 10px;
     margin-right: 10px;
-    border: 2px solid rgb(118, 170, 187);
+    border: none;
     color: darkblue;
-    background-color: rgba(226, 238, 241, 0.685);
+    /* background-color: rgba(226, 238, 241, 0.685); */
+    background-color: transparent;
     width: 130px;
     height: 45px;
     border-radius: 10px;
@@ -17,20 +18,80 @@
 }
 
 .NavBtns:hover {
-    background-color: rgb(118, 170, 187);
-    color: white;
-    transition: all 0.3s ease-out;
+    color: #1d91de;
+    border-bottom: 2px solid darkblue;
+    border-top: 2px solid darkblue;
+    font-size: 120%;
+    color: darkblue;
+    transition: all .3s ease-out;
 }
 
 .navbar-brand {
-    font-family: 'Pangolin', cursive;
+    font-family: 'Vollkorn', serif;
     font-size: 25px;
     font-weight: bolder;
+    border-radius: 100px;
+    padding-left: 10px;
     margin-left: 15px;
+    animation: moveleft 8s infinite ease;
+}
+
+.dot1 {
+    animation: dot1 2s infinite;
+}
+
+.dot2 {
+    animation: dot2 2s infinite;
+}
+
+.dot3 {
+    animation: dot3 2s infinite;
+}
+
+@keyframes dot1 {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes dot2 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot3 {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes moveleft {
+    0% {
+        background: #019cfc;
+        width: 50px;
+    }
+    50% {
+        background: #a1dbff;
+        width: 350px;
+    }
+    100% {
+        background: #019cfc;
+        width: 50px;
+    }
 }
 
 .navbar {
-    background: -webkit-linear-gradient(left, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%);
+    background: -webkit-linear-gradient(left, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
     width: auto;
     height: 70px;
     padding: 0;

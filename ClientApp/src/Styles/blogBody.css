@@ -38,15 +38,12 @@
     position: fixed;
     margin-left: auto;
     margin-right: auto;
-
-   
 }
 
 .createNewPostBtn {
-    border-radius: 10px;
     width: 280px;
     height: 50px;
-    border: 2px solid rgb(118, 170, 187);
+    border: none;
     color: darkblue;
     background-color: transparent;
     margin-top: 30px;
@@ -54,13 +51,17 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
 }
 
-
-
 .createNewPostBtn:hover {
-    color: white;
+    border-radius: 10px;
+    color: darkblue;
+    border-bottom: 3px solid darkblue;
+    border-top: 3px solid darkblue;
     background-color: rgb(255, 217, 0);
+    font-size: 120%;
     transition: all ease-out 0.3s;
 }
 
@@ -103,15 +104,19 @@
 .editProfileBtn {
     width: 125px;
     height: 35px;
-    border: 2px solid rgb(118, 170, 187);
+    border: none;
     background-color: transparent;
-    border-radius: 5px;
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
     color: darkblue;
 }
 
 .editProfileBtn:hover {
-    background-color: rgb(118, 170, 187);
-    color: white;
+    font-size: 110%;
+    border-radius: 5px;
+    border-bottom: 3px solid darkblue;
+    border-top: 3px solid darkblue;
+    color: darkblue;
     transition: all ease-in 0.3s;
 }
 
@@ -133,20 +138,16 @@
     }
 }
 
-
 @media only screen and (max-width: 580px) {
     .profileArea {
         margin-top: 20px;
         border-radius: 15px;
         width: auto;
         height: 55vh;
-        /* background-color: rgb(243, 242, 242); */
         padding-top: 15px;
     }
-
     .createNewPostBtn {
         width: 340px;
         display: block;
     }
-    
 }

@@ -36,9 +36,9 @@
     height: 50px;
     color: darkblue;
     background-color: transparent;
-    border: 2px solid rgb(118, 170, 187);
     text-align: center;
     border-radius: 10px;
+    border: none;
     font-weight: bolder;
 }
 
@@ -48,21 +48,24 @@
     height: 50px;
     color: darkblue;
     background-color: transparent;
-    border: 2px solid rgb(118, 170, 187);
+    border: none;
     text-align: center;
     border-radius: 10px;
     font-weight: bolder;
 }
 
 .createPostCancelBtn:hover {
-    color: white;
+    border-bottom: 3px solid darkblue;
+    border-top: 3px solid darkblue;
+    color: darkblue;
     background-color: rgb(255, 217, 0);
     transition: all ease-out 0.3s;
 }
 
 .createPostPostBtn:hover {
-    color: white;
-    background-color: rgb(118, 170, 187);
+    border-bottom: 3px solid darkblue;
+    border-top: 3px solid darkblue;
+    color: darkblue;
     transition: all ease-out 0.3s;
 }
 

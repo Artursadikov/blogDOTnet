@@ -43,7 +43,7 @@ class NavBar extends Component {
         return (
 
             <nav style={{ height: !Toggle ? '80px' : '300px' }} className="navbar">
-                <h1 className="navbar-brand">Blog<em>DOT</em>net</h1>
+                <h1 className="navbar-brand">Blog<em>DOT</em>net  <span className="dot1">. </span><span className="dot2">. </span><span className="dot3">. </span></h1>
                 <ul className="navbarUl">
                     <li className="hamburger">
                         <FontAwesomeIcon style={{ color: Toggle ? 'red' : 'darkblue' }} onClick={this.navToggler} className="hamburgerBtn" icon={faCircle} />
@@ -52,7 +52,7 @@ class NavBar extends Component {
                         <button onClick={this.goToRegisterPage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Registration</button>
                     </li>
                     <li className="navitem">
-                        <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Lobby</button>
+                        <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Main</button>
                     </li>
                 </ul>
             </nav>
