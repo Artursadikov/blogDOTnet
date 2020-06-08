@@ -1,4 +1,6 @@
 .post {
+    background-size: cover;
+    background-image: -webkit-linear-gradient(left, #ceeafde7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg');
     width: 96%;
     box-shadow: 10px 12px 17px -9px rgba(98, 167, 186, 1);
     border-radius: 10px;
@@ -7,7 +9,10 @@
     margin-top: 10px;
     margin-bottom: 25px;
     height: 300px;
-    border: 2px solid rgba(98, 167, 186, 1);
+    border-top: 1px solid rgba(98, 167, 186, 1);
+    border-left: 1px solid rgba(98, 167, 186, 1);
+    border-bottom: 2px solid rgba(98, 167, 186, 1);
+    border-right: 2px solid rgba(98, 167, 186, 1);
 }
 
 .post2 {
