@@ -8,7 +8,7 @@ export default class Comment extends Component {
                 <li className={this.props.class}>
                     {this.props.Comment}
                     <div className="btnEditDelDiv">
-                        <button className="commentBtnEdit">Edit</button>
+                        <button onClick={this.props.editComment} className="commentBtnEdit">Edit</button>
                         <button onClick={this.props.deleteCommentBtn} className="commentBtnDelete">Delete</button>
                     </div>
                 </li>

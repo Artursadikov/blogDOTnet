@@ -83,6 +83,7 @@ export default class BlogBody extends Component {
             this.getApi();
         })
             .catch(e => {
+                // error to UI
                 this.setState({
                     error: true
                 })
@@ -207,7 +208,6 @@ export default class BlogBody extends Component {
                             <div className="profileBtnsEditAndInfo" >
                                 <button className="editProfileBtn">Edit</button>
                                 <button className="editProfileBtn">My Posts Info</button>
-
                             </div>
                             <button onClick={this.CreateANewPostBtn} className="createNewPostBtn">Add A New Post</button>
                         </div>
@@ -226,7 +226,6 @@ export default class BlogBody extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }

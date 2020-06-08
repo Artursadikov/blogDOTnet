@@ -24,7 +24,9 @@ export default class Post extends Component {
         commentArea: false,
         commentListOpen: false,
         data: [],
-        commentVal: ''
+        commentVal: '',
+        singleCommentData: [],
+        editCommentMode: false
 
     }
 
@@ -88,16 +90,52 @@ export default class Post extends Component {
         })
     }
 
+    // edit button get comment value
+    editComment = (id) => {
+        axios.get(`Comment/${id}`).then(res => {
+            this.setState({
+                singleCommentData: res.data.data
+            })
+        }).then(() => {
+            this.setState({
+                commentVal: this.state.singleCommentData.content,
+                editCommentMode: true
+            })
+        }).then(() => {
+            this.setState({
+                commentListOpen: false,
+                commentArea: true
+            })
+        })
+    }
+
+    // edit Comment Post (put) Comment
+    sendEditBtn = (id) => {
+        axios.put(`Comment/${id}`, {
+            "id": id,
+            "content": this.state.commentVal
+        }).then(() => {
+            console.log(this.state.singleCommentData.id)
+        }).then(() => {
+            this.commentList();
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
 
     render() {
 
         // comments list
-        let comments = this.state.data.map((item) => {
-            return <Comment class={item.id % 2 === 0 ? "commentLI" : "commentLI2"}
+        let comments = this.state.data.map((item, index) => {
+
+            return <Comment class={index % 2 === 0 ? "commentLI" : "commentLI2"}
                 Comment={item.content}
                 key={item.id}
+                editComment={(id) => this.editComment(item.id)}
                 deleteCommentBtn={(id) => this.deleteCommentBtn(item.id)} />
         });
+
 
         const comment = this.state.comment;
         const commentArea = this.state.commentArea;
@@ -133,7 +171,7 @@ export default class Post extends Component {
                 </div>
                 {
                     commentListOpen ?
-                        <div className={ commentListOpen ?"divCommentArea": "divCommentArea2"}>
+                        <div className={commentListOpen ? "divCommentArea" : "divCommentArea2"}>
                             <div className="commentListDiv">
                                 <ul className="UlcommentList">
                                     {comments}
@@ -141,11 +179,16 @@ export default class Post extends Component {
                             </div>
                         </div>
                         :
-                        <div className={ commentArea ? "divCommentArea": "divCommentArea2"}>
+                        <div className={commentArea ? "divCommentArea" : "divCommentArea2"}>
                             <textarea value={this.state.commentVal} onChange={(e) => this.textareaComments(e)} style={{ resize: 'none' }} className="inputComment" rows="6" cols="50" name="comment" />
                             <div className="commentBtnsPost">
                                 <button onClick={this.cancelUploadPostBtn} className="cancelComment">Cancel</button>
-                                <button onClick={this.addANewComment} className="addComment">Comment</button>
+                                {
+                                    this.state.editCommentMode ?
+                                        <button onClick={(id) => this.sendEditBtn(this.state.singleCommentData.id)} className="addComment">Send-Edit</button>
+                                        :
+                                        <button onClick={this.addANewComment} className="addComment">Comment</button>
+                                }
                             </div>
                         </div>
                 }
