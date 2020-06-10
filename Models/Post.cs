@@ -16,8 +16,7 @@ namespace postAPI.Models
         public int saved { get; set; } = 0;
         public bool pressedLK { get; set; } = false;
         public bool pressedSD { get; set; } = false;
-        public User User { get; set; }
-        public List<Comment> comment { get; set; }
-
+        public List<Comment> comments { get; set; }
+       
     }
 }

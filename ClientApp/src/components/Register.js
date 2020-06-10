@@ -36,9 +36,9 @@ export default class Register extends Component {
         return (
             <div className="container register">
                 <div className="registerHeadre">
-                    <div style={{ borderBottom: !this.state.loginShow ? '1px solid darkBlue' : 'none', backgroundColor: !this.state.loginShow ? 'rgba(83, 185, 219, 0.5)' : 'transparent' }}
+                    <div style={{ borderBottom: !this.state.loginShow ? '1px solid darkBlue' : 'none', backgroundColor: !this.state.loginShow ? 'rgba(83, 185, 219, 0.5)' : 'transparent', paddingTop: '5px' }}
                         onClick={this.loginSection} className="loginSection">Login</div>
-                    <div style={{ borderBottom: !this.state.registerShow ? '1px solid darkBlue' : 'none', backgroundColor: !this.state.registerShow ? 'rgba(83, 185, 219, 0.5)' : 'transparent' }}
+                    <div style={{ borderBottom: !this.state.registerShow ? '1px solid darkBlue' : 'none', backgroundColor: !this.state.registerShow ? 'rgba(83, 185, 219, 0.5)' : 'transparent', paddingTop: '5px'  }}
                         onClick={this.registerSection} className="registerSection">Register</div>
                 </div>
                 <div className="registerBody">

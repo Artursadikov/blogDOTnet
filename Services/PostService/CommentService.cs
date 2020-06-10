@@ -61,8 +61,9 @@ namespace Blog.Services.PostService
         public async Task<ServiceResponse<List<Comment>>> GetAllCommentes()
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
-            List<Comment> dbComments = await _context.Comments.ToListAsync();
-            Response.Data = dbComments;
+
+            List<Comment> comments = await _context.Comments.ToListAsync();
+            Response.Data = comments;
             return Response;
         }
 

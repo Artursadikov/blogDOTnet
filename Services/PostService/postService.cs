@@ -24,13 +24,10 @@ namespace Blog.Services.PostService
 
         }
 
-       // private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         public async Task<ServiceResponse<List<Post>>> AddNewPost(Post newPost)
         {
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             List<Post> dbPost = await _context.Posts.ToListAsync();
-            // all users CAN POST A NEW POST
-           //newPost.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == GetUserId());
             await _context.Posts.AddAsync(newPost);
             await _context.SaveChangesAsync();
             serviceResponse.Data = dbPost;
@@ -67,12 +64,11 @@ namespace Blog.Services.PostService
         }
 
 
-        //  public async Task<ServiceResponse<List<Post>>> GetAllPosts(int userId)
         public async Task<ServiceResponse<List<Post>>> GetAllPosts()
         {
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             List<Post> dbPost = await _context.Posts.ToListAsync();
-            //  List<Post> dbPost = await _context.Posts.Where(c => c.User.Id == userId).ToListAsync();
+
             serviceResponse.Data = dbPost;
             return serviceResponse;
         }
