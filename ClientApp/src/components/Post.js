@@ -22,13 +22,14 @@ export default class Post extends Component {
         data: [],
         commentVal: '',
         singleCommentData: [],
-        editCommentMode: false
+        editCommentMode: false,
+        
 
     }
 
     // comment list open and get api
     commentList = () => {
-        axios.get("comment/comments").then(res => {
+        axios.get(`comment/comments/${this.props.postId}`).then(res => {
             this.setState({
                 commentListOpen: !this.state.commentListOpen,
                 comment: true,
@@ -68,7 +69,7 @@ export default class Post extends Component {
 
     // add a new comment
     addANewComment = () => {
-        axios.post('Comment', { content: this.state.commentVal }).then(() => {
+        axios.post('Comment', { content: this.state.commentVal , "post": { Id : this.props.postId }}).then(() => {
             this.commentList();
         })
     }
@@ -81,6 +82,7 @@ export default class Post extends Component {
                     comment: true,
                     commentArea: false,
                     data: res.data.data
+
                 })
             })
         })
@@ -107,27 +109,32 @@ export default class Post extends Component {
 
     // edit Comment Post (put) Comment
     sendEditBtn = (id) => {
+        console.log(this.props.postId)
         axios.put(`Comment/${id}`, {
             "id": id,
-            "content": this.state.commentVal
+            "content": this.state.commentVal,
+            // "post": { Id : this.props.postId }
         }).then(() => {
-            console.log(this.state.singleCommentData.id)
+
         }).then(() => {
             this.commentList();
         }).catch(err => {
             console.log(err);
         })
+      
     }
 
 
     render() {
 
+        
         // comments list
         let comments = this.state.data.map((item, index) => {
 
             return <Comment class={index % 2 === 0 ? "commentLI" : "commentLI2"}
                 Comment={item.content}
                 key={item.id}
+                post_id={this.props.postId}
                 editComment={(id) => this.editComment(item.id)}
                 deleteCommentBtn={(id) => this.deleteCommentBtn(item.id)} />
         });
@@ -137,7 +144,7 @@ export default class Post extends Component {
         const commentArea = this.state.commentArea;
         const commentListOpen = this.state.commentListOpen;
 
-        
+
 
         return (
             <li className={(commentArea || commentListOpen) ? "post2" : "post"}>

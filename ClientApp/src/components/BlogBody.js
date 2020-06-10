@@ -171,6 +171,7 @@ export default class BlogBody extends Component {
 
             return <Post
                 key={post.id}
+                postId = {post.id}
                 userNickname={post.userNickname}
                 postContent={post.postContent}
                 likes={post.likes}

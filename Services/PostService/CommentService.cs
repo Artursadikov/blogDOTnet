@@ -18,10 +18,12 @@ namespace Blog.Services.PostService
 
         }
 
-        public async Task<ServiceResponse<List<Comment>>> AddNewComment(Comment newComment, int id)
+        public async Task<ServiceResponse<List<Comment>>> AddNewComment(Comment newComment)
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
             List<Comment> dbComment = await _context.Comments.ToListAsync();
+            newComment.Post = await _context.Posts.FindAsync(newComment.Post.Id);
+
             await _context.Comments.AddAsync(newComment);
             await _context.SaveChangesAsync();
 
@@ -58,11 +60,12 @@ namespace Blog.Services.PostService
             return Response;
         }
 
-        public async Task<ServiceResponse<List<Comment>>> GetAllCommentes()
+        public async Task<ServiceResponse<List<Comment>>> GetAllCommentes(int postId)
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
 
-            List<Comment> comments = await _context.Comments.ToListAsync();
+            List<Comment> comments = await _context.Comments.Where(c => c.Post.Id == postId).ToListAsync();
+            
             Response.Data = comments;
             return Response;
         }
@@ -81,8 +84,10 @@ namespace Blog.Services.PostService
             try
             {
                 Comment comment = await _context.Comments.FirstOrDefaultAsync(c => c.id == UpdatedComment.id);
-
+                // Post relatedpost =  _context.Posts.Find(UpdatedComment.Post.Id);
+                
                 comment.content = UpdatedComment.content;
+                // comment.Post = relatedpost;
 
                 _context.Comments.Update(comment);
                 await _context.SaveChangesAsync();

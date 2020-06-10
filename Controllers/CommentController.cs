@@ -25,10 +25,10 @@ namespace Blog.Controllers
 
         // all users can see all the comments
         [AllowAnonymous]
-        [HttpGet("comments")]
-        public async Task<IActionResult> Get()
+        [HttpGet("comments/{postId}")]
+        public async Task<IActionResult> Get(int postId)
         {
-            return Ok(await _commentService.GetAllCommentes());
+            return Ok(await _commentService.GetAllCommentes(postId));
         }
 
 
@@ -41,9 +41,9 @@ namespace Blog.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> AddComment(Comment newComment, int id)
+        public async Task<IActionResult> AddComment(Comment newComment)
         {
-            return Ok(await _commentService.AddNewComment(newComment, id));
+            return Ok(await _commentService.AddNewComment(newComment));
         }
 
 
