@@ -22,7 +22,7 @@ export default class BlogBody extends Component {
         inputValue: '',
         textareaValue: '',
         error: false
-       
+
     }
 
 
@@ -108,7 +108,7 @@ export default class BlogBody extends Component {
         axios.delete(`api/Post/${id}`).then(() => {
             this.getApi();
         })
-        console.log(id)
+     
     }
 
 
@@ -125,13 +125,9 @@ export default class BlogBody extends Component {
                 postId={post.id}
                 userNickname={post.userNickname}
                 postContent={post.postContent}
-                // likes={this.state.like}
-                // saved={this.state.love}
-                pressedLK={post.pressedLK}
-                pressedSD={post.pressedSD}
                 deletePostBtn={() => this.deletePostBtn(post.id)}
-            // faHeartBtn={(e) => this.faHeartBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
-            // faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
+                // faHeartBtn={() => this.faHeartBtn(post.id )}
+                // faThumbsUpBtn={() => this.faThumbsUpBtn(post.id)}
             />
         })
 

@@ -31,9 +31,20 @@ namespace Blog.Services.PostService
             throw new System.NotImplementedException();
         }
 
-        public Task<likes> UpdateLike(likes UpdatedPost, int id)
+        public async Task<likes> UpdateLike(likes Updatedlike, int id)
         {
-            throw new System.NotImplementedException();
+         
+                likes like = await _context.like.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
+
+                like.like = Updatedlike.like;
+                like.love = Updatedlike.love;
+
+
+                _context.like.Update(like);
+                await _context.SaveChangesAsync();
+  
+
+            return like;
         }
 
 

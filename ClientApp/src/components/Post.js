@@ -28,7 +28,8 @@ export default class Post extends Component {
         post_id: this.props.postId,
         likes: [],
         like: 0,
-        love: 0
+        love: 0,
+        likeId: ''
     }
 
 
@@ -46,7 +47,8 @@ export default class Post extends Component {
             this.state.likes.map(like => {
                 return this.setState({
                     like: like.like,
-                    love: like.love
+                    love: like.love,
+                    likeId: like.id
                 })
             })
         })
@@ -98,13 +100,15 @@ export default class Post extends Component {
     // add a new comment
     addANewComment = () => {
         //interval server error ??????
-        axios.post('Comment', { content: this.state.commentVal, post: { Id: this.state.post_id } })
-            .then((res) => {
-                this.commentList();
-                console.log(res)
-            }).catch(err => {
-                console.log(err);
-            })
+        axios.post('Comment', {
+            content: this.state.commentVal,
+            post: { Id: this.state.post_id }
+        }).then(() => {
+            this.commentList();
+        }).catch(err => {
+            console.log(err);
+        })
+
 
     }
 
@@ -152,6 +156,36 @@ export default class Post extends Component {
         })
     }
 
+    //love button
+    faHeartBtn = () => {
+        axios.put(`Like/${this.state.post_id}`,
+            {
+                "id": this.state.likeId,
+                "like": this.state.like,
+                "love": this.state.love + 1,
+                "post": null
+            }
+        ).then(() => {
+            this.getLikesApi();
+        })
+    }
+
+    //like button
+    faThumbsUpBtn = () => {
+
+        axios.put(`Like/${this.state.post_id}`,
+            {
+                "id": this.state.likeId,
+                "like": this.state.like + 1,
+                "love": this.state.love,
+                "post": null
+            }
+        ).then(() => {
+            this.getLikesApi();
+        })
+    }
+
+
 
     render() {
 
@@ -197,9 +231,9 @@ export default class Post extends Component {
                         <p>Saved:  {this.state.love}</p>
                     </div>
                     <div className="divActionBtns">
-                        <FontAwesomeIcon onClick={this.props.faHeartBtn} className="heartREG" icon={faHeart} />
+                        <FontAwesomeIcon onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
                         <FontAwesomeIcon style={{ color: comment ? 'black' : 'lightgrey' }} onClick={this.faCommentBtn} className="commentREG" icon={faComment} />
-                        <FontAwesomeIcon onClick={this.props.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
+                        <FontAwesomeIcon onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
                 {
