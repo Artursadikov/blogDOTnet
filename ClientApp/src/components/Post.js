@@ -29,6 +29,8 @@ export default class Post extends Component {
         likes: [],
         like: 0,
         love: 0,
+        liked: 0,
+        loved: 0,
         likeId: ''
     }
 
@@ -48,7 +50,9 @@ export default class Post extends Component {
                 return this.setState({
                     like: like.like,
                     love: like.love,
-                    likeId: like.id
+                    likeId: like.id,
+                    liked: like.liked,
+                    loved: like.loved
                 })
             })
         })
@@ -93,13 +97,12 @@ export default class Post extends Component {
             commentArea: !this.state.commentArea,
             editCommentMode: false,
             commentVal: ''
-
         })
     }
 
     // add a new comment
     addANewComment = () => {
-        //interval server error ??????
+        //interval server error 500 ??????
         axios.post('Comment', {
             content: this.state.commentVal,
             post: { Id: this.state.post_id }
@@ -108,8 +111,6 @@ export default class Post extends Component {
         }).catch(err => {
             console.log(err);
         })
-
-
     }
 
     //delete a comment
@@ -120,7 +121,6 @@ export default class Post extends Component {
                     comment: true,
                     commentArea: false,
                     data: res.data.data
-
                 })
             })
         })
@@ -139,7 +139,6 @@ export default class Post extends Component {
                 commentListOpen: false,
                 commentArea: true
             })
-
         })
     }
 
@@ -163,7 +162,9 @@ export default class Post extends Component {
                 "id": this.state.likeId,
                 "like": this.state.like,
                 "love": this.state.love + 1,
-                "post": null
+                "post": null,
+                "liked": this.state.liked,
+                "loved": this.state.loved === 0 ? 1 : 0
             }
         ).then(() => {
             this.getLikesApi();
@@ -178,7 +179,9 @@ export default class Post extends Component {
                 "id": this.state.likeId,
                 "like": this.state.like + 1,
                 "love": this.state.love,
-                "post": null
+                "post": null,
+                "liked": this.state.liked === 0 ? 1 : 0,
+                "loved": this.state.loved
             }
         ).then(() => {
             this.getLikesApi();
@@ -231,9 +234,9 @@ export default class Post extends Component {
                         <p>Saved:  {this.state.love}</p>
                     </div>
                     <div className="divActionBtns">
-                        <FontAwesomeIcon onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
+                        <FontAwesomeIcon style={{color: this.state.loved === 0 ? 'black' : 'red' }} onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
                         <FontAwesomeIcon style={{ color: comment ? 'black' : 'lightgrey' }} onClick={this.faCommentBtn} className="commentREG" icon={faComment} />
-                        <FontAwesomeIcon onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
+                        <FontAwesomeIcon style={{color: this.state.liked === 0 ? 'black' : 'blue' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
                 {

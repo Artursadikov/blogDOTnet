@@ -33,16 +33,19 @@ namespace Blog.Services.PostService
 
         public async Task<likes> UpdateLike(likes Updatedlike, int id)
         {
-         
-                likes like = await _context.like.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
 
-                like.like = Updatedlike.like;
-                like.love = Updatedlike.love;
+            likes like = await _context.like.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
+
+            like.like = Updatedlike.like;
+            like.love = Updatedlike.love;
+            like.loved = Updatedlike.loved;
+            like.liked = Updatedlike.liked;
 
 
-                _context.like.Update(like);
-                await _context.SaveChangesAsync();
-  
+
+            _context.like.Update(like);
+            await _context.SaveChangesAsync();
+
 
             return like;
         }

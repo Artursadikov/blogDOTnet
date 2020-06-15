@@ -126,8 +126,7 @@ export default class BlogBody extends Component {
                 userNickname={post.userNickname}
                 postContent={post.postContent}
                 deletePostBtn={() => this.deletePostBtn(post.id)}
-                // faHeartBtn={() => this.faHeartBtn(post.id )}
-                // faThumbsUpBtn={() => this.faThumbsUpBtn(post.id)}
+
             />
         })
 

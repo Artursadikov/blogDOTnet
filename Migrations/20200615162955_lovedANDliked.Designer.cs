@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using postAPI.Models;
 
 namespace Blog.Migrations
 {
     [DbContext(typeof(PostContext))]
-    partial class PostContextModelSnapshot : ModelSnapshot
+    [Migration("20200615162955_lovedANDliked")]
+    partial class lovedANDliked
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,14 +84,14 @@ namespace Blog.Migrations
                     b.Property<int>("like")
                         .HasColumnType("int");
 
-                    b.Property<int>("liked")
-                        .HasColumnType("int");
+                    b.Property<bool>("liked")
+                        .HasColumnType("bit");
 
                     b.Property<int>("love")
                         .HasColumnType("int");
 
-                    b.Property<int>("loved")
-                        .HasColumnType("int");
+                    b.Property<bool>("loved")
+                        .HasColumnType("bit");
 
                     b.HasKey("id");
 
