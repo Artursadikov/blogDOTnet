@@ -21,14 +21,24 @@ namespace Blog.Services.PostService
         public async Task<ServiceResponse<List<Comment>>> AddNewComment(Comment newComment)
         {
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
-            List<Comment> dbComment = await _context.Comments.ToListAsync();
-            newComment.Post = await _context.Posts.FindAsync(newComment.Post.Id);
+            try
+            {
+                List<Comment> dbComment = await _context.Comments.ToListAsync();
+                newComment.Post = await _context.Posts.FindAsync(newComment.Post.Id);
 
-            await _context.Comments.AddAsync(newComment);
-            await _context.SaveChangesAsync();
+                await _context.Comments.AddAsync(newComment);
+                await _context.SaveChangesAsync();
 
-            Response.Data = dbComment;
+                Response.Data = dbComment;
+
+            }
+            catch (Exception ex)
+            {
+                Response.Sucsses = false;
+                Response.Message = ex.Message;
+            }
             return Response;
+
         }
 
         public async Task<ServiceResponse<List<Comment>>> DeleteComment(int id)
@@ -65,7 +75,7 @@ namespace Blog.Services.PostService
             ServiceResponse<List<Comment>> Response = new ServiceResponse<List<Comment>>();
 
             List<Comment> comments = await _context.Comments.Where(c => c.Post.Id == postId).ToListAsync();
-            
+
             Response.Data = comments;
             return Response;
         }
@@ -84,10 +94,9 @@ namespace Blog.Services.PostService
             try
             {
                 Comment comment = await _context.Comments.FirstOrDefaultAsync(c => c.id == UpdatedComment.id);
-                // Post relatedpost =  _context.Posts.Find(UpdatedComment.Post.Id);
-                
+            
                 comment.content = UpdatedComment.content;
-                // comment.Post = relatedpost;
+             
 
                 _context.Comments.Update(comment);
                 await _context.SaveChangesAsync();

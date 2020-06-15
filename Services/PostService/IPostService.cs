@@ -8,7 +8,7 @@ namespace Blog.Services
 {
     public interface IPostService
     {
-        //  Task<ServiceResponse<List<Post>>> GetAllPosts(int userId);
+        
         Task<ServiceResponse<List<Post>>> GetAllPosts();
         Task<ServiceResponse<Post>> GetPostById(int id);
         Task<ServiceResponse<List<Post>>> AddNewPost(Post newPost);

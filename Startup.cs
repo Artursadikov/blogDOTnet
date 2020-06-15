@@ -36,6 +36,7 @@ namespace Blog
             services.AddScoped<IPostService, postService>();
             services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ILikesService, LikesService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters

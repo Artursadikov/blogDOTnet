@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Post extends Component {
 
+
+
     state = {
         comment: true,
         commentArea: false,
@@ -23,13 +25,36 @@ export default class Post extends Component {
         commentVal: '',
         singleCommentData: [],
         editCommentMode: false,
-        
+        post_id: this.props.postId,
+        likes: [],
+        like: 0,
+        love: 0
+    }
 
+
+    componentDidMount() {
+        this.getLikesApi();
+    }
+
+    // get likes and love posts API
+    getLikesApi = () => {
+        axios.get(`/Like/likes/${this.state.post_id}`).then(res => {
+            this.setState({
+                likes: res.data.data
+            })
+        }).then(() => {
+            this.state.likes.map(like => {
+                return this.setState({
+                    like: like.like,
+                    love: like.love
+                })
+            })
+        })
     }
 
     // comment list open and get api
     commentList = () => {
-        axios.get(`comment/comments/${this.props.postId}`).then(res => {
+        axios.get(`comment/comments/${this.state.post_id}`).then(res => {
             this.setState({
                 commentListOpen: !this.state.commentListOpen,
                 comment: true,
@@ -63,21 +88,30 @@ export default class Post extends Component {
     cancelUploadPostBtn = () => {
         this.setState({
             comment: !this.state.comment,
-            commentArea: !this.state.commentArea
+            commentArea: !this.state.commentArea,
+            editCommentMode: false,
+            commentVal: ''
+
         })
     }
 
     // add a new comment
     addANewComment = () => {
-        axios.post('Comment', { content: this.state.commentVal , "post": { Id : this.props.postId }}).then(() => {
-            this.commentList();
-        })
+        //interval server error ??????
+        axios.post('Comment', { content: this.state.commentVal, post: { Id: this.state.post_id } })
+            .then((res) => {
+                this.commentList();
+                console.log(res)
+            }).catch(err => {
+                console.log(err);
+            })
+
     }
 
     //delete a comment
     deleteCommentBtn = (id) => {
         axios.delete(`Comment/${id}`).then(() => {
-            axios.get("comment/comments").then(res => {
+            axios.get(`comment/comments/${this.state.post_id}`).then(res => {
                 this.setState({
                     comment: true,
                     commentArea: false,
@@ -97,44 +131,38 @@ export default class Post extends Component {
         }).then(() => {
             this.setState({
                 commentVal: this.state.singleCommentData.content,
-                editCommentMode: true
-            })
-        }).then(() => {
-            this.setState({
+                editCommentMode: true,
                 commentListOpen: false,
                 commentArea: true
             })
+
         })
     }
 
     // edit Comment Post (put) Comment
     sendEditBtn = (id) => {
-        console.log(this.props.postId)
         axios.put(`Comment/${id}`, {
             "id": id,
             "content": this.state.commentVal,
-            // "post": { Id : this.props.postId }
-        }).then(() => {
 
         }).then(() => {
             this.commentList();
         }).catch(err => {
             console.log(err);
         })
-      
     }
 
 
     render() {
 
-        
+
         // comments list
         let comments = this.state.data.map((item, index) => {
 
             return <Comment class={index % 2 === 0 ? "commentLI" : "commentLI2"}
                 Comment={item.content}
                 key={item.id}
-                post_id={this.props.postId}
+                postId={this.props.postId}
                 editComment={(id) => this.editComment(item.id)}
                 deleteCommentBtn={(id) => this.deleteCommentBtn(item.id)} />
         });
@@ -157,16 +185,16 @@ export default class Post extends Component {
                     {/* small screen comments display none on large screen */}
                     <div className="divCommentsSmallScreen">
                         <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
-                        <p>Likes: {this.props.likes}</p>
-                        <p>Saved:  {this.props.saved}</p>
+                        <p>Likes:  {this.state.like}</p>
+                        <p>Saved:  {this.state.love}</p>
                     </div>
                 </div>
                 <div className="divActionBtnsContainer">
                     {/* large screen comments display none on small screen */}
                     <div className="divComments">
                         <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
-                        <p>Likes:  {this.props.likes}</p>
-                        <p>Saved:  {this.props.saved}</p>
+                        <p>Likes:  {this.state.like}</p>
+                        <p>Saved:  {this.state.love}</p>
                     </div>
                     <div className="divActionBtns">
                         <FontAwesomeIcon onClick={this.props.faHeartBtn} className="heartREG" icon={faHeart} />

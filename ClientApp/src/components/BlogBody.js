@@ -22,6 +22,7 @@ export default class BlogBody extends Component {
         inputValue: '',
         textareaValue: '',
         error: false
+       
     }
 
 
@@ -35,6 +36,8 @@ export default class BlogBody extends Component {
             })
         })
     }
+
+
 
     //Open modal create new post
     CreateANewPostBtn = () => {
@@ -95,62 +98,10 @@ export default class BlogBody extends Component {
 
     async componentDidMount() {
         await this.getApi();
+
     }
 
 
-    //heart btn // save btn
-    faHeartBtn = (e, id, name, postContent, saved, likes, pressedSD, pressedLK) => {
-
-        let icon = e.target.closest('svg');
-
-        axios.put(`api/post/${id}`, {
-            "id": id,
-            "postContent": postContent,
-            "userNickname": name,
-            "likes": likes,
-            "saved": pressedSD === false ? saved + 1 : saved - 1,
-            "pressedLK": pressedLK,
-            "pressedSD": pressedSD = !pressedSD
-        }).then(() => {
-
-            if (pressedSD === true) {
-                icon.style = "color: red"
-            } else if (pressedSD === false) {
-                icon.style = "color: black"
-            }
-
-        }).then(() => {
-            this.getApi();
-        })
-    }
-
-
-
-    //like button
-    faThumbsUpBtn = (e, id, name, postContent, saved, likes, pressedLK, pressedSD) => {
-
-        let icon = e.target.closest('svg');
-
-
-        axios.put(`api/post/${id}`, {
-            "id": id,
-            "postContent": postContent,
-            "userNickname": name,
-            "likes": pressedLK === false ? likes + 1 : likes - 1,
-            "saved": saved,
-            "pressedLK": pressedLK = !pressedLK,
-            "pressedSD": pressedSD
-        }).then(() => {
-            if (pressedLK === true) {
-                icon.style = "color: #4257f5"
-            } else if (pressedLK === false) {
-                icon.style = "color: black"
-            }
-
-        }).then(() => {
-            this.getApi();
-        })
-    }
 
     //delete post button
     deletePostBtn = (id) => {
@@ -171,16 +122,16 @@ export default class BlogBody extends Component {
 
             return <Post
                 key={post.id}
-                postId = {post.id}
+                postId={post.id}
                 userNickname={post.userNickname}
                 postContent={post.postContent}
-                likes={post.likes}
-                saved={post.saved}
+                // likes={this.state.like}
+                // saved={this.state.love}
                 pressedLK={post.pressedLK}
                 pressedSD={post.pressedSD}
                 deletePostBtn={() => this.deletePostBtn(post.id)}
-                faHeartBtn={(e) => this.faHeartBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
-                faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
+            // faHeartBtn={(e) => this.faHeartBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedSD)}
+            // faThumbsUpBtn={(e) => this.faThumbsUpBtn(e, post.id, post.userNickname, post.postContent, post.saved, post.likes, post.pressedLK)}
             />
         })
 

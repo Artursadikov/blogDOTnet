@@ -17,6 +17,7 @@ namespace postAPI.Models
         public bool pressedLK { get; set; } = false;
         public bool pressedSD { get; set; } = false;
         public List<Comment> comments { get; set; }
-       
+        public List<likes> like { get; set; }
+
     }
 }
