@@ -157,11 +157,13 @@ export default class Post extends Component {
 
     //love button
     faHeartBtn = () => {
+
+
         axios.put(`Like/${this.state.post_id}`,
             {
                 "id": this.state.likeId,
                 "like": this.state.like,
-                "love": this.state.love + 1,
+                "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love -1 ,
                 "post": null,
                 "liked": this.state.liked,
                 "loved": this.state.loved === 0 ? 1 : 0
@@ -177,7 +179,7 @@ export default class Post extends Component {
         axios.put(`Like/${this.state.post_id}`,
             {
                 "id": this.state.likeId,
-                "like": this.state.like + 1,
+                "like": this.state.liked === 0 ? this.state.like + 1 : this.state.like -1,
                 "love": this.state.love,
                 "post": null,
                 "liked": this.state.liked === 0 ? 1 : 0,
@@ -234,9 +236,9 @@ export default class Post extends Component {
                         <p>Saved:  {this.state.love}</p>
                     </div>
                     <div className="divActionBtns">
-                        <FontAwesomeIcon style={{color: this.state.loved === 0 ? 'black' : 'red' }} onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
+                        <FontAwesomeIcon style={{ color: this.state.loved === 0 ? 'black' : 'red' }} onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
                         <FontAwesomeIcon style={{ color: comment ? 'black' : 'lightgrey' }} onClick={this.faCommentBtn} className="commentREG" icon={faComment} />
-                        <FontAwesomeIcon style={{color: this.state.liked === 0 ? 'black' : 'blue' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
+                        <FontAwesomeIcon style={{ color: this.state.liked === 0 ? 'black' : 'blue' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
                 {
