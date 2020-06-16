@@ -78,14 +78,14 @@ namespace postAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            ServiceResponse<List<Post>> responce = await _PostService.DeletePost(id);
+            ServiceResponse<List<Post>> response = await _PostService.DeletePost(id);
 
-            if (responce.Data == null)
+            if (response.Data == null)
             {
-                return NotFound(responce);
+                return NotFound(response);
             }
 
-            return Ok(responce);
+            return Ok(response);
         }
 
 

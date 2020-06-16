@@ -88,18 +88,16 @@ namespace Blog.Services.PostService
             {
                 Post post = await _context.Posts.FirstOrDefaultAsync(c => c.Id == UpdatedPost.Id);
 
-                    post.PostContent = UpdatedPost.PostContent;
-                    post.likes = UpdatedPost.likes;
-                    post.pressedLK = UpdatedPost.pressedLK;
-                    post.pressedSD = UpdatedPost.pressedSD;
-                    post.saved = UpdatedPost.saved;
-                    post.userNickname = UpdatedPost.userNickname;
+                post.PostContent = UpdatedPost.PostContent;
+                post.userNickname = UpdatedPost.userNickname;
+                post.header = UpdatedPost.header;
+                post.date = UpdatedPost.date;
 
-                    _context.Posts.Update(post);
-                    await _context.SaveChangesAsync();
+                _context.Posts.Update(post);
+                await _context.SaveChangesAsync();
 
-                    serviceResponse.Data = post;
-           
+                serviceResponse.Data = post;
+
 
             }
 

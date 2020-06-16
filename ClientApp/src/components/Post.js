@@ -163,7 +163,7 @@ export default class Post extends Component {
             {
                 "id": this.state.likeId,
                 "like": this.state.like,
-                "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love -1 ,
+                "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love - 1,
                 "post": null,
                 "liked": this.state.liked,
                 "loved": this.state.loved === 0 ? 1 : 0
@@ -179,7 +179,7 @@ export default class Post extends Component {
         axios.put(`Like/${this.state.post_id}`,
             {
                 "id": this.state.likeId,
-                "like": this.state.liked === 0 ? this.state.like + 1 : this.state.like -1,
+                "like": this.state.liked === 0 ? this.state.like + 1 : this.state.like - 1,
                 "love": this.state.love,
                 "post": null,
                 "liked": this.state.liked === 0 ? 1 : 0,
@@ -217,6 +217,8 @@ export default class Post extends Component {
             <li className={(commentArea || commentListOpen) ? "post2" : "post"}>
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
+                    <small className="postDate">{this.props.date}</small>
+                    <p className="postHeader">{this.props.header}</p>
                     <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
                 </div>
                 <div className="divPostContent">

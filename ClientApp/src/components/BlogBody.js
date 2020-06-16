@@ -20,8 +20,10 @@ export default class BlogBody extends Component {
         isLoading: true,
         showModal: false,
         inputValue: '',
+        inputValueHeader: '',
         textareaValue: '',
-        error: false
+        error: false,
+        dateTime: new Date()
 
     }
 
@@ -34,6 +36,8 @@ export default class BlogBody extends Component {
                 isLoading: false
 
             })
+            console.log(res)
+            console.log(this.state.dateTime)
         })
     }
 
@@ -46,6 +50,7 @@ export default class BlogBody extends Component {
         })
     }
 
+    //close new post modal
     cancelPostbtn = () => {
         this.setState({
             showModal: false
@@ -58,6 +63,13 @@ export default class BlogBody extends Component {
         let val = e.target.value;
         this.setState({
             inputValue: val
+        })
+    }
+    //input value handler
+    inputHeader = (e) => {
+        let val = e.target.value;
+        this.setState({
+            inputValueHeader: val
         })
     }
 
@@ -75,11 +87,14 @@ export default class BlogBody extends Component {
 
         axios.post('api/Post', {
             postContent: this.state.textareaValue,
-            userNickname: this.state.inputValue
+            userNickname: this.state.inputValue,
+            date: this.state.dateTime,
+            header: this.state.inputValueHeader
         }).then(() => {
             this.setState({
                 inputValue: '',
                 textareaValue: '',
+                inputValueHeader: '',
                 showModal: false
             })
         }).then(() => {
@@ -108,7 +123,7 @@ export default class BlogBody extends Component {
         axios.delete(`api/Post/${id}`).then(() => {
             this.getApi();
         })
-     
+
     }
 
 
@@ -124,10 +139,13 @@ export default class BlogBody extends Component {
                 key={post.id}
                 postId={post.id}
                 userNickname={post.userNickname}
+                date={post.date}
+                header={post.header}
                 postContent={post.postContent}
-                deletePostBtn={() => this.deletePostBtn(post.id)}
+                deletePostBtn={(id) => this.deletePostBtn(post.id)}
 
             />
+
         })
 
 
@@ -140,8 +158,10 @@ export default class BlogBody extends Component {
                     <NewPostCreateModal
                         cancelPostbtn={this.cancelPostbtn}
                         onChengeinputNickVal={(e) => this.inputNickVal(e)}
+                        onChengeinputHeader={(e) => this.inputHeader(e)}
                         onChengetextareaVal={(e) => this.textareaVal(e)}
                         inputValue={this.state.inputValue}
+                        inputValueHeader={this.state.inputValueHeader}
                         textareaValue={this.state.textareaValue}
                         post={this.post}
                     />

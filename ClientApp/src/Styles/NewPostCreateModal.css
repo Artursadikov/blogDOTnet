@@ -10,7 +10,7 @@
     color: darkblue;
 }
 
-.createPostInput, .createPostTextarea {
+.createPostInput, .createPostInputHeader {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -21,10 +21,20 @@
     padding: 1px 5px 1px 5px;
 }
 
+.createPostTextarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    padding: 1px 5px 1px 5px;
+}
+
 .createPostBtnDiv {
     margin-top: 5px;
     width: auto;
-    height: 100px;
+    height: 50px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -32,8 +42,8 @@
 
 .createPostCancelBtn {
     display: block;
-    width: 125px;
-    height: 50px;
+    width: 100px;
+    height: 30px;
     color: darkblue;
     background-color: transparent;
     text-align: center;
@@ -44,8 +54,8 @@
 
 .createPostPostBtn {
     display: block;
-    width: 125px;
-    height: 50px;
+    width: 100px;
+    height: 30px;
     color: darkblue;
     background-color: transparent;
     border: none;
