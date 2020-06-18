@@ -144,6 +144,7 @@ export default class Post extends Component {
 
     // edit Comment Post (put) Comment
     sendEditBtn = (id) => {
+
         axios.put(`Comment/${id}`, {
             "id": id,
             "content": this.state.commentVal,
@@ -157,20 +158,20 @@ export default class Post extends Component {
 
     //love button
     faHeartBtn = () => {
-
-
-        axios.put(`Like/${this.state.post_id}`,
-            {
-                "id": this.state.likeId,
-                "like": this.state.like,
-                "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love - 1,
-                "post": null,
-                "liked": this.state.liked,
-                "loved": this.state.loved === 0 ? 1 : 0
-            }
-        ).then(() => {
-            this.getLikesApi();
-        })
+  
+            axios.put(`Like/${this.state.post_id}`,
+                {
+                    "id": this.state.likeId,
+                    "like": this.state.like,
+                    "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love - 1,
+                    "post": null,
+                    "liked": this.state.liked,
+                    "loved": this.state.loved === 0 ? 1 : 0
+                }
+            ).then(() => {
+                this.getLikesApi();
+            })
+    
     }
 
     //like button

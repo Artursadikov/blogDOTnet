@@ -36,8 +36,6 @@ export default class BlogBody extends Component {
                 isLoading: false
 
             })
-            console.log(res)
-            console.log(this.state.dateTime)
         })
     }
 
@@ -108,6 +106,9 @@ export default class BlogBody extends Component {
                 //console log error from server
                 console.log(e);
             })
+
+
+          
     }
 
 

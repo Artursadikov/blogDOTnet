@@ -47,6 +47,7 @@ namespace Blog.Services.PostService
             try
             {
                 Comment comment = await _context.Comments.FirstOrDefaultAsync(c => c.id == id);
+               
                 if (comment != null)
                 {
                     _context.Comments.Remove(comment);

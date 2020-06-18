@@ -9,6 +9,7 @@ namespace Blog.Services.PostService
         Task<ServiceResponse<List<likes>>> GetAllLikes(int postId);
         Task<likes> GetLikeById(int id);
         Task<likes> UpdateLike(likes Updatedlike, int id);
+        Task<List<likes>> CreateLike(likes newLike);
         
     }
 }

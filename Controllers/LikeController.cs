@@ -45,5 +45,12 @@ namespace Blog.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Create(likes newLike)
+        {
+            return Ok(await _likeService.CreateLike(newLike));
+        }
+
     }
 }

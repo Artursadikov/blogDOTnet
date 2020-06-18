@@ -39,7 +39,8 @@ namespace Blog.Services.PostService
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             try
             {
-                Post post = await _context.Posts.FirstOrDefaultAsync(c => c.Id == id);
+                Post post = await _context.Posts.Include(c => c.comments).Include(l => l.like).FirstOrDefaultAsync(c => c.Id == id);
+              
                 if (post != null)
                 {
                     _context.Posts.Remove(post);

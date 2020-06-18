@@ -17,6 +17,18 @@ namespace Blog.Services.PostService
             _context = context;
         }
 
+        public async Task<List<likes>> CreateLike(likes newlike)
+        {
+            List<likes> likes = await _context.like.ToListAsync();
+            newlike.Post = await _context.Posts.FindAsync(newlike.Post.Id);
+           
+
+            await _context.like.AddAsync(newlike);
+            await _context.SaveChangesAsync();
+            return likes;
+
+        }
+
         public async Task<ServiceResponse<List<likes>>> GetAllLikes(int postId)
         {
             ServiceResponse<List<likes>> Response = new ServiceResponse<List<likes>>();
