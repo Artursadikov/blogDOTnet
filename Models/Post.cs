@@ -16,7 +16,7 @@ namespace postAPI.Models
         public string header { get; set; }
         public DateTime date { get; set; }
         public List<Comment> comments { get; set; }
-        public List<likes> like { get; set; }
+        public List<Like> like { get; set; }
 
     }
 }

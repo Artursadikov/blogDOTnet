@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using postAPI.Models;
 using Blog.Services;
 using Blog.Services.PostService;
-using Blog.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Blog.Models;
 
 namespace Blog
 {
@@ -31,25 +31,32 @@ namespace Blog
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+
+            }).AddEntityFrameworkStores<IdentityAppContext>();
 
             services.AddControllersWithViews();
             services.AddScoped<IPostService, postService>();
-            services.AddScoped<IAuthRepo, AuthRepo>();
+            // services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikesService, LikesService>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            // {
+            //     options.TokenValidationParameters = new TokenValidationParameters
+            //     {
+            //         ValidateIssuerSigningKey = true,
+            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+            //         .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+            //         ValidateIssuer = false,
+            //         ValidateAudience = false
+            //     };
+            // });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
 
             services.AddDbContext<PostContext>
             (opt => opt.UseSqlServer(Configuration["Data:PostAPIConnection:ConnectionString"]));
@@ -80,8 +87,8 @@ namespace Blog
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

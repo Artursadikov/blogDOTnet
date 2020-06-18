@@ -17,36 +17,35 @@ namespace Blog.Services.PostService
             _context = context;
         }
 
-        public async Task<List<likes>> CreateLike(likes newlike)
+        public async Task<List<Like>> CreateLike(Like newlike)
         {
-            List<likes> likes = await _context.like.ToListAsync();
+            List<Like> likes = await _context.likes.ToListAsync();
             newlike.Post = await _context.Posts.FindAsync(newlike.Post.Id);
-           
 
-            await _context.like.AddAsync(newlike);
+            await _context.likes.AddAsync(newlike);
             await _context.SaveChangesAsync();
             return likes;
 
         }
 
-        public async Task<ServiceResponse<List<likes>>> GetAllLikes(int postId)
+        public async Task<ServiceResponse<List<Like>>> GetAllLikes(int postId)
         {
-            ServiceResponse<List<likes>> Response = new ServiceResponse<List<likes>>();
-            List<likes> dbLikes = await _context.like.Where(l => l.Post.Id == postId).ToListAsync();
+            ServiceResponse<List<Like>> Response = new ServiceResponse<List<Like>>();
+            List<Like> dbLikes = await _context.likes.Where(l => l.Post.Id == postId).ToListAsync();
 
             Response.Data = dbLikes;
             return Response;
         }
 
-        public Task<likes> GetLikeById(int id)
+        public Task<Like> GetLikeById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<likes> UpdateLike(likes Updatedlike, int id)
+        public async Task<Like> UpdateLike(Like Updatedlike, int id)
         {
 
-            likes like = await _context.like.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
+            Like like = await _context.likes.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
 
             like.like = Updatedlike.like;
             like.love = Updatedlike.love;
@@ -55,7 +54,7 @@ namespace Blog.Services.PostService
 
 
 
-            _context.like.Update(like);
+            _context.likes.Update(like);
             await _context.SaveChangesAsync();
 
 

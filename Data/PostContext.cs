@@ -13,9 +13,9 @@ namespace postAPI.Models
         public PostContext(DbContextOptions<PostContext> options) : base(options) { }
 
         public DbSet<Post> Posts { get; set; }
-        public DbSet<User> Users { get; set; }
+        // public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<likes> like { get; set; }
+        public DbSet<Like> likes { get; set; }
 
 
 
@@ -25,7 +25,7 @@ namespace postAPI.Models
             .HasOne(p => p.Post)
             .WithMany(c => c.comments);
 
-             modelBuilder.Entity<likes>()
+             modelBuilder.Entity<Like>()
             .HasOne(p => p.Post)
             .WithMany(l => l.like);
               

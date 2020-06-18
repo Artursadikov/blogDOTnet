@@ -31,10 +31,10 @@ namespace Blog.Controllers
         
         [AllowAnonymous]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(likes UpdatedLike, int id)
+        public async Task<IActionResult> Update(Like UpdatedLike, int id)
         {
 
-            likes like = await _likeService.UpdateLike(UpdatedLike, id);
+            Like like = await _likeService.UpdateLike(UpdatedLike, id);
 
             if (like == null)
             {
@@ -47,9 +47,11 @@ namespace Blog.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Create(likes newLike)
+        public async Task<IActionResult> Create(Like newLike)
         {
-            return Ok(await _likeService.CreateLike(newLike));
+            
+                return Ok(await _likeService.CreateLike(newLike)); 
+            
         }
 
     }

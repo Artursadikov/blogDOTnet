@@ -6,10 +6,10 @@ namespace Blog.Services.PostService
 {
     public interface ILikesService
     {
-        Task<ServiceResponse<List<likes>>> GetAllLikes(int postId);
-        Task<likes> GetLikeById(int id);
-        Task<likes> UpdateLike(likes Updatedlike, int id);
-        Task<List<likes>> CreateLike(likes newLike);
+        Task<ServiceResponse<List<Like>>> GetAllLikes(int postId);
+        Task<Like> GetLikeById(int id);
+        Task<Like> UpdateLike(Like Updatedlike, int id);
+        Task<List<Like>> CreateLike(Like newLike);
         
     }
 }

@@ -2,7 +2,7 @@ using postAPI.Models;
 
 namespace Blog.Models
 {
-    public class likes
+    public class Like
     {
         public int id { get; set; }
         public int like { get; set; } = 0;
