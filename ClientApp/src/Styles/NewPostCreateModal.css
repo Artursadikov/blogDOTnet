@@ -10,6 +10,31 @@
     color: darkblue;
 }
 
+.themeBtnsDiv {
+    height: 55px;
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.themeBtn {
+    height: 50px;
+    width: 65px;
+    border: none;
+    border-radius: 5px;
+    color: darkblue;
+}
+
+.themeDisplay {
+    color: darkblue;
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+    text-align: center;
+}
+
 .createPostInput, .createPostInputHeader {
     display: block;
     margin-left: auto;

@@ -1,3 +1,48 @@
+.navBtnWrapperDiv {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: 2px solid darkblue;
+    border-radius: 50%;
+    top: 15px;
+    right: 15px;
+    
+    background-color: rgba(228, 247, 255, 0.479);
+}
+
+.navBtnWrapperDiv:hover{
+    top: 10px;
+    transform: rotate(180deg);
+    /* box-shadow: 1px 34px 41px 0px rgba(50,134,252,0.67); */
+    transition: 0.3s all;
+}
+
+
+
+.BtnWrapperDiv {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 15px;
+    left: 10px;
+    
+}
+
+.top,.center,.bottom {
+    color: darkblue;
+    width: 45px;
+    height: 5px;
+    background-color: blue;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.bottom:hover,.center:hover,.top:hover {
+    margin-bottom: 3px;
+    transition: 0.1s;
+}
+
+
 .NavBtns {
     margin-left: 10px;
     margin-right: 10px;
@@ -100,6 +145,7 @@
     background-image: -webkit-linear-gradient(left, #f0f9ffe7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg');
     border-top: 2px solid #1d91de;
     background-size: cover;
+    /* position: relative; */
 }
 
 .navbarUl {

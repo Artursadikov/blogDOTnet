@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Blog.Controllers
 {
     // need to remove authorize to post a new post or login in front <--
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CommentController : ControllerBase

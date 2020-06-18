@@ -50,7 +50,7 @@
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
     border: none;
     padding: 10px;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(225, 245, 255);
     overflow: auto;
 }
 
@@ -68,8 +68,19 @@
 
 .PostCreatorUserName {
     font-weight: bolder;
-    text-decoration: underline;
+    font-size: 15px;
+    color: darkblue;
+    /* text-decoration: underline; */
     margin-left: 10px;
+}
+.postHeader {
+    color: darkblue;
+    background-color: rgba(135, 213, 233, 0.534);
+    width: 60px;
+    height: 20px;
+    margin-top: 3px;
+    text-align: center;
+    border-radius: 3px;
 }
 
 .divActionBtns {

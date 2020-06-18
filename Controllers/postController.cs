@@ -15,7 +15,7 @@ using System.Security.Claims;
 namespace postAPI.Controllers
 {
     // need to remove authorize to post a new post or login in front <--
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PostController : ControllerBase

@@ -91,8 +91,8 @@ namespace Blog.Services.PostService
 
                 post.PostContent = UpdatedPost.PostContent;
                 post.userNickname = UpdatedPost.userNickname;
-                post.header = UpdatedPost.header;
-                post.date = UpdatedPost.date;
+                post.theme = UpdatedPost.theme;
+
 
                 _context.Posts.Update(post);
                 await _context.SaveChangesAsync();

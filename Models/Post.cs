@@ -13,8 +13,7 @@ namespace postAPI.Models
         public int Id { get; set; }
         public string PostContent { get; set; }
         public string userNickname { get; set; }
-        public string header { get; set; }
-        public DateTime date { get; set; }
+        public string theme { get; set; }
         public List<Comment> comments { get; set; }
         public List<Like> like { get; set; }
 

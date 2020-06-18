@@ -31,17 +31,16 @@ namespace Blog
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AppUser, AppRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
 
-            }).AddEntityFrameworkStores<IdentityAppContext>();
 
             services.AddControllersWithViews();
             services.AddScoped<IPostService, postService>();
             // services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ILikesService, LikesService>();
+            services.AddControllersWithViews()
+                 .AddNewtonsoftJson(options =>
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             // {
             //     options.TokenValidationParameters = new TokenValidationParameters

@@ -45,7 +45,13 @@ namespace Blog.Services.PostService
         public async Task<Like> UpdateLike(Like Updatedlike, int id)
         {
 
-            Like like = await _context.likes.FirstOrDefaultAsync(c => c.id == Updatedlike.id);
+            Like like = await _context.likes.FirstAsync(c => c.id == Updatedlike.id);
+
+            if (like == null)
+            {
+                await _context.likes.AddAsync(Updatedlike);
+                await _context.SaveChangesAsync();
+            }
 
             like.like = Updatedlike.like;
             like.love = Updatedlike.love;

@@ -23,8 +23,6 @@ export default class BlogBody extends Component {
         inputValueHeader: '',
         textareaValue: '',
         error: false,
-        dateTime: new Date()
-
     }
 
 
@@ -39,7 +37,12 @@ export default class BlogBody extends Component {
         })
     }
 
-
+    // open Custom Input
+    openCustomInput = () => {
+        this.setState({
+            openInputTheme: true
+        })
+    }
 
     //Open modal create new post
     CreateANewPostBtn = () => {
@@ -51,7 +54,8 @@ export default class BlogBody extends Component {
     //close new post modal
     cancelPostbtn = () => {
         this.setState({
-            showModal: false
+            showModal: false,
+            openInputTheme: false
         })
     }
 
@@ -86,8 +90,7 @@ export default class BlogBody extends Component {
         axios.post('api/Post', {
             postContent: this.state.textareaValue,
             userNickname: this.state.inputValue,
-            date: this.state.dateTime,
-            header: this.state.inputValueHeader
+            theme: this.state.inputValueHeader
         }).then(() => {
             this.setState({
                 inputValue: '',
@@ -108,7 +111,7 @@ export default class BlogBody extends Component {
             })
 
 
-          
+
     }
 
 
@@ -140,8 +143,7 @@ export default class BlogBody extends Component {
                 key={post.id}
                 postId={post.id}
                 userNickname={post.userNickname}
-                date={post.date}
-                header={post.header}
+                theme={post.theme}
                 postContent={post.postContent}
                 deletePostBtn={(id) => this.deletePostBtn(post.id)}
 
@@ -165,6 +167,11 @@ export default class BlogBody extends Component {
                         inputValueHeader={this.state.inputValueHeader}
                         textareaValue={this.state.textareaValue}
                         post={this.post}
+                        sportTheme={()=> this.setState({ inputValueHeader: "Sport"})}
+                        socialTheme={()=>this.setState({ inputValueHeader: "Social"})}
+                        newsTheme={()=>this.setState({ inputValueHeader: "News"})}
+                        politicsTheme={()=>this.setState({ inputValueHeader: "Politics"})}
+                        themeDisplay={this.state.inputValueHeader}
                     />
                 </Modal>
                 <div className="row blogBody">

@@ -219,8 +219,7 @@ export default class Post extends Component {
             <li className={(commentArea || commentListOpen) ? "post2" : "post"}>
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
-                    <small className="postDate">{this.props.date}</small>
-                    <p className="postHeader">{this.props.header}</p>
+                    <p className="postHeader">{this.props.theme}</p>
                     <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
                 </div>
                 <div className="divPostContent">
@@ -263,7 +262,7 @@ export default class Post extends Component {
                                     this.state.editCommentMode ?
                                         <button onClick={(id) => this.sendEditBtn(this.state.singleCommentData.id)} className="addComment">Send-Edit</button>
                                         :
-                                        <button onClick={this.addANewComment} className="addComment">Comment</button>
+                                        <button onClick={this.state.commentVal ? this.addANewComment : null} className="addComment">Comment</button>
                                 }
                             </div>
                         </div>
