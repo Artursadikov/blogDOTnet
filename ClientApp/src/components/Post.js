@@ -26,37 +26,10 @@ export default class Post extends Component {
         singleCommentData: [],
         editCommentMode: false,
         post_id: this.props.postId,
-        likes: [],
-        like: 0,
-        love: 0,
-        liked: 0,
-        loved: 0,
-        likeId: ''
+
     }
 
 
-    componentDidMount() {
-        this.getLikesApi();
-    }
-
-    // get likes and love posts API
-    getLikesApi = () => {
-        axios.get(`/Like/likes/${this.state.post_id}`).then(res => {
-            this.setState({
-                likes: res.data.data
-            })
-        }).then(() => {
-            this.state.likes.map(like => {
-                return this.setState({
-                    like: like.like,
-                    love: like.love,
-                    likeId: like.id,
-                    liked: like.liked,
-                    loved: like.loved
-                })
-            })
-        })
-    }
 
     // comment list open and get api
     commentList = () => {
@@ -102,11 +75,14 @@ export default class Post extends Component {
 
     // add a new comment
     addANewComment = () => {
-        //interval server error 500 ??????
+
         axios.post('Comment', {
             content: this.state.commentVal,
             post: { Id: this.state.post_id }
         }).then(() => {
+            this.setState({
+                commentVal: ''
+            })
             this.commentList();
         }).catch(err => {
             console.log(err);
@@ -122,6 +98,13 @@ export default class Post extends Component {
                     commentArea: false,
                     data: res.data.data
                 })
+                if (this.state.data.length === 0) {
+                    this.setState({
+                        commentListOpen: false,
+                        editCommentMode: false,
+
+                    })
+                }
             })
         })
     }
@@ -156,41 +139,7 @@ export default class Post extends Component {
         })
     }
 
-    //love button
-    faHeartBtn = () => {
 
-        axios.put(`Like/${this.state.post_id}`,
-            {
-                "id": this.state.likeId,
-                "like": this.state.like,
-                "love": this.state.loved === 0 ? this.state.love + 1 : this.state.love - 1,
-                "post": null,
-                "liked": this.state.liked,
-                "loved": this.state.loved === 0 ? 1 : 0
-            }
-        ).then(() => {
-            this.getLikesApi();
-        })
-
-    }
-
-    //like button
-    faThumbsUpBtn = () => {
-
-        axios.put(`Like/${this.state.post_id}`,
-            {
-                "id": this.state.likeId,
-                "like": this.state.liked === 0 ? this.state.like + 1 : this.state.like - 1,
-                "love": this.state.love,
-                "post": null,
-                "liked": this.state.liked === 0 ? 1 : 0,
-                "loved": this.state.loved
-            }
-        ).then(() => {
-            this.getLikesApi();
-        })
-
-    }
 
 
 
@@ -226,22 +175,22 @@ export default class Post extends Component {
                     <p className="commentTextarea">{this.props.postContent}</p>
                     {/* small screen comments display none on large screen */}
                     <div className="divCommentsSmallScreen">
-                        <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
-                        <p>Likes:  {this.state.like}</p>
-                        <p>Saved:  {this.state.love}</p>
+                        <p onClick={this.commentList} className="commentsInPost">Comments: {this.state.data.length}</p>
+                        <p>Likes:  {this.props.likeCount}</p>
+                        <p>Loved:  {this.props.loveCount}</p>
                     </div>
                 </div>
                 <div className="divActionBtnsContainer">
                     {/* large screen comments display none on small screen */}
                     <div className="divComments">
-                        <p onClick={this.commentList} className="commentsInPost">Comments: placeholder</p>
-                        <p>Likes:  {this.state.like}</p>
-                        <p>Saved:  {this.state.love}</p>
+                        <p onClick={this.commentList} className="commentsInPost">Comments:{this.state.data.length}</p>
+                        <p>Likes:  {this.props.likeCount}</p>
+                        <p>Loved:  {this.props.loveCount}</p>
                     </div>
                     <div className="divActionBtns">
-                        <FontAwesomeIcon style={{ color: this.state.loved === 0 ? 'black' : 'red' }} onClick={this.faHeartBtn} className="heartREG" icon={faHeart} />
+                        <FontAwesomeIcon onClick={this.props.faHeartBtn} className="heartREG" icon={faHeart} />
                         <FontAwesomeIcon style={{ color: comment ? 'black' : 'lightgrey' }} onClick={this.faCommentBtn} className="commentREG" icon={faComment} />
-                        <FontAwesomeIcon style={{ color: this.state.liked === 0 ? 'black' : 'blue' }} onClick={this.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
+                        <FontAwesomeIcon onClick={this.props.faThumbsUpBtn} className="likeREG" icon={faThumbsUp} />
                     </div>
                 </div>
                 {

@@ -36,6 +36,8 @@
     border-bottom: 2px solid rgb(118, 170, 187);
     /* box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1); */
     box-shadow: 10px 12px 17px -9px rgba(98, 167, 186, 1);
+    background-size: cover;
+    background-image: -webkit-linear-gradient(left, #ceeafde7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg');
     position: fixed;
     margin-left: auto;
     margin-right: auto;

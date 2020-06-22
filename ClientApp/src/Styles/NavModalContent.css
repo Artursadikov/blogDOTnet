@@ -1,0 +1,43 @@
+.NavModalContentDiv {
+    width: 300px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navBtn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    height: 50px;
+    margin-top: 25px;
+    border: none;
+    background-color: transparent;
+    color: blue;
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: 'Piedra', cursive;
+    letter-spacing: 1.5px;
+}
+
+.navBtn:hover {
+    color: aqua;
+    transition: all .2s ease-in-out;
+}
+.logout:hover {
+    color: tomato;
+    transition: all .2s ease-in-out;
+}
+.closeNavModalXBtn {
+ width: 25px;
+ height: 25px;
+ border-radius: 50%;
+ border: none;
+ background-color: transparent;
+ color: tomato;
+ font-weight: bolder;
+ font-size: 20px;
+ font-family: 'Piedra', cursive;
+}
+

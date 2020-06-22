@@ -13,6 +13,7 @@
     border-left: 1px solid rgba(98, 167, 186, 1);
     border-bottom: 2px solid rgba(98, 167, 186, 1);
     border-right: 2px solid rgba(98, 167, 186, 1);
+    position: relative;
 }
 
 .post2 {
@@ -52,6 +53,8 @@
     padding: 10px;
     background-color: rgb(225, 245, 255);
     overflow: auto;
+    font-family: 'Piedra', cursive;
+    letter-spacing: 1.5px;
 }
 
 .commentsInPost:hover {
@@ -73,6 +76,7 @@
     /* text-decoration: underline; */
     margin-left: 10px;
 }
+
 .postHeader {
     color: darkblue;
     background-color: rgba(135, 213, 233, 0.534);
@@ -84,9 +88,6 @@
 }
 
 .divActionBtns {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
     width: 40%;
     height: 65px;
 }
@@ -115,24 +116,38 @@
 
 .heartREG {
     font-size: 200%;
-    margin-left: 10px;
-    margin-right: 10px;
     cursor: pointer;
-}
-
-.commentREG {
-    font-size: 200%;
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+    position: absolute;
+    top: 240px;
+    right: 120px;
 }
 
 .likeREG {
     font-size: 200%;
-    margin-left: 10px;
-    margin-right: 10px;
     cursor: pointer;
-  
+    position: absolute;
+    top: 240px;
+    right: 20px;
+}
+
+.heartREG:hover {
+    top: 235px;
+    font-size: 220%;
+    transition: all 0.5;
+}
+
+.likeREG:hover {
+    top: 235px;
+    font-size: 220%;
+    transition: all 0.5;
+}
+
+.commentREG {
+    font-size: 200%;
+    cursor: pointer;
+    position: absolute;
+    top: 240px;
+    right: 70px;
 }
 
 .divCommentArea {
@@ -155,6 +170,7 @@
     border-radius: 5px;
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
     padding-left: 10px;
+    /* font-family: 'Piedra', cursive; */
 }
 
 .commentBtnsPost {
@@ -235,24 +251,6 @@
 }
 
 @media only screen and (max-width: 720px) {
-    .heartREG {
-        font-size: 250%;
-        margin-left: 15px;
-        margin-right: 15px;
-        cursor: pointer;
-    }
-    .commentREG {
-        font-size: 250%;
-        margin-left: 15px;
-        margin-right: 15px;
-        cursor: pointer;
-    }
-    .likeREG {
-        font-size: 250%;
-        margin-left: 15px;
-        margin-right: 15px;
-        cursor: pointer;
-    }
     .divComments p {
         display: none;
     }

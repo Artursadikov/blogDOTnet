@@ -6,6 +6,8 @@ import { withRouter } from "react-router";
 
 import '../Styles/NavBar.css';
 import NavBackDrop from '../Modal/NavBackDrop';
+import NavBarModal from '../Modal/NavBarModal';
+import NavModalContent from './NavModalContent';
 
 class NavBar extends Component {
 
@@ -31,11 +33,17 @@ class NavBar extends Component {
     }
 
     goToBlogBodyBtn = () => {
+        this.setState({
+            show: false
+        })
         this.props.history.push('/')
     }
 
 
     goToRegisterPage = () => {
+        this.setState({
+            show: false
+        })
         this.props.history.push('/register')
     }
 
@@ -79,6 +87,17 @@ class NavBar extends Component {
                         <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Main</button>
                     </li>
                 </ul> */}
+                <NavBarModal
+                    show={this.state.show}
+                    closeXModalBtn={this.closeBackDrop}
+                >
+                    <NavModalContent
+                        goToBlogBodyBtn={this.goToBlogBodyBtn}
+                        goToRegisterPage={this.goToRegisterPage}
+                    />
+                </NavBarModal>
+
+
                 <NavBackDrop
                     show={this.state.show}
                     closeBackDrop={this.closeBackDrop}

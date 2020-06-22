@@ -15,7 +15,7 @@ namespace postAPI.Models
         public DbSet<Post> Posts { get; set; }
         // public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Like> likes { get; set; }
+
 
 
 
@@ -25,9 +25,7 @@ namespace postAPI.Models
             .HasOne(p => p.Post)
             .WithMany(c => c.comments);
 
-             modelBuilder.Entity<Like>()
-            .HasOne(p => p.Post)
-            .WithMany(l => l.like);
+
               
         }
 

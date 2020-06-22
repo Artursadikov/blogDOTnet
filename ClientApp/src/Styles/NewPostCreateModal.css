@@ -27,6 +27,13 @@
     color: darkblue;
 }
 
+.themeBtn:hover {
+    background-color: rgba(255, 255, 0, 0.561);
+    color: darkblue;
+    font-weight: 900;
+    transition: all 0.3s;
+}
+
 .themeDisplay {
     color: darkblue;
     font-size: 20px;
@@ -50,6 +57,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     border: none;
     border-radius: 5px;
     resize: none;
@@ -57,7 +65,7 @@
 }
 
 .createPostBtnDiv {
-    margin-top: 5px;
+    margin-top: 25px;
     width: auto;
     height: 50px;
     display: flex;

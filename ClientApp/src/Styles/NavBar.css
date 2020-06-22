@@ -1,23 +1,21 @@
 .navBtnWrapperDiv {
-    position: relative;
+    position: absolute;
+    top: 5px;
+    right: 40px;
     width: 70px;
     height: 70px;
-    border: 2px solid darkblue;
+    border: 2px solid rgba(143, 177, 255, 1);
     border-radius: 50%;
-    top: 15px;
-    right: 15px;
-    
     background-color: rgba(228, 247, 255, 0.479);
+    box-shadow: inset 10px 10px 5px 0px rgba(143, 177, 255, 1);
 }
 
-.navBtnWrapperDiv:hover{
+.navBtnWrapperDiv:hover {
     top: 10px;
     transform: rotate(180deg);
-    /* box-shadow: 1px 34px 41px 0px rgba(50,134,252,0.67); */
+    box-shadow: inset 10px 10px 5px 0px rgba(143, 177, 255, 1);
     transition: 0.3s all;
 }
-
-
 
 .BtnWrapperDiv {
     width: 50px;
@@ -25,43 +23,42 @@
     position: relative;
     top: 15px;
     left: 10px;
-    
 }
 
-.top,.center,.bottom {
-    color: darkblue;
+.top, .center, .bottom {
     width: 45px;
     height: 5px;
-    background-color: blue;
+    background-color:rgb(86, 133, 245);
     margin-bottom: 10px;
     border-radius: 50px;
+    box-shadow: inset 2px 2px 1px 0px rgb(102, 125, 179);
 }
 
-.bottom:hover,.center:hover,.top:hover {
+.bottom:hover, .center:hover, .top:hover {
     margin-bottom: 3px;
     transition: 0.1s;
 }
 
-
-.NavBtns {
+/* .NavBtns {
     margin-left: 10px;
     margin-right: 10px;
     border: none;
     color: darkblue;
     /* background-color: rgba(226, 238, 241, 0.685); */
-    background-color: transparent;
+    /* background-color: transparent;
     width: 130px;
     height: 45px;
     border-radius: 10px;
-}
+}  */
 
-.NavBtns.logout:hover {
+
+/* .NavBtns.logout:hover {
     background-color: rgb(226, 80, 12);
     border: 2px solid rgb(226, 80, 12);
     color: white;
     transition: all 0.3s ease-out;
-}
-
+} */
+/* 
 .NavBtns:hover {
     color: #1d91de;
     border-bottom: 2px solid darkblue;
@@ -69,7 +66,7 @@
     font-size: 120%;
     color: darkblue;
     transition: all .3s ease-out;
-}
+} */
 
 .navbar-brand {
     font-family: 'Vollkorn', serif;
@@ -136,16 +133,13 @@
 }
 
 .navbar {
-    /* background: -webkit-linear-gradient(left, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%); */
     width: auto;
     height: 70px;
-    padding: 0;
-    /* border-bottom: 1px solid #1d91de; */
     background-size: cover;
     background-image: -webkit-linear-gradient(left, #f0f9ffe7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg');
     border-top: 2px solid #1d91de;
     background-size: cover;
-    /* position: relative; */
+    position: relative;
 }
 
 .navbarUl {
@@ -195,7 +189,7 @@
     .navbar {
         background-color: rgba(193, 233, 246, 0.5);
         width: auto;
-        box-shadow: 0px 1px 1px #1d91de;
+        /* box-shadow: 0px 1px 1px #1d91de; */
         height: 90px;
         padding: 0;
         position: relative;

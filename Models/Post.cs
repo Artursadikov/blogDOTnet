@@ -14,8 +14,12 @@ namespace postAPI.Models
         public string PostContent { get; set; }
         public string userNickname { get; set; }
         public string theme { get; set; }
+        public int like { get; set; }
+        public int love { get; set; }
+        public bool liked { get; set; } = false;
+        public bool loved { get; set; } = false;
         public List<Comment> comments { get; set; }
-        public List<Like> like { get; set; }
+      
 
     }
 }

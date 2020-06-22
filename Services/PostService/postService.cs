@@ -39,7 +39,7 @@ namespace Blog.Services.PostService
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             try
             {
-                Post post = await _context.Posts.Include(c => c.comments).Include(l => l.like).FirstOrDefaultAsync(c => c.Id == id);
+                Post post = await _context.Posts.Include(c => c.comments).FirstOrDefaultAsync(c => c.Id == id);
               
                 if (post != null)
                 {
@@ -92,6 +92,10 @@ namespace Blog.Services.PostService
                 post.PostContent = UpdatedPost.PostContent;
                 post.userNickname = UpdatedPost.userNickname;
                 post.theme = UpdatedPost.theme;
+                post.like = UpdatedPost.like;
+                post.liked = UpdatedPost.liked;
+                post.love = UpdatedPost.love;
+                post.loved = UpdatedPost.loved;
 
 
                 _context.Posts.Update(post);

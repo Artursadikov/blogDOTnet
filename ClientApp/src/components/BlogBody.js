@@ -23,10 +23,23 @@ export default class BlogBody extends Component {
         inputValueHeader: '',
         textareaValue: '',
         error: false,
+        likeCount: 0,
+        loveCount: 0
     }
 
 
     getApi = () => {
+        axios.get('/api/Post').then(res => {
+
+            this.setState({
+                posts: res.data.data,
+                isLoading: false
+
+            })
+        })
+    }
+
+    getLikesAndLove = () => {
         axios.get('/api/Post').then(res => {
 
             this.setState({
@@ -131,7 +144,42 @@ export default class BlogBody extends Component {
     }
 
 
+    //love button
+    faHeartBtn = (id, love, loved, userNick, theme, like, liked, content) => {
 
+
+        axios.put(`api/Post/${id}`, {
+            "id": id,
+            "like": like,
+            "liked": liked,
+            "love": love + 1,
+            "loved": loved,
+            "userNickname": userNick,
+            "theme": theme,
+            "postContent": content
+        }).then(() => {
+            this.getApi();
+        })
+    }
+
+    //like button
+    faThumbsUpBtn = (id, love, loved, userNick, theme, like, liked, content) => {
+
+        axios.put(`api/Post/${id}`, {
+            "id": id,
+            "like": like + 1,
+            "liked": liked,
+            "love": love,
+            "loved": loved,
+            "userNickname": userNick,
+            "theme": theme,
+            "postContent": content
+
+        }).then(() => {
+            this.getApi();
+        })
+
+    }
 
 
     render() {
@@ -144,9 +192,16 @@ export default class BlogBody extends Component {
                 postId={post.id}
                 userNickname={post.userNickname}
                 theme={post.theme}
+                likeCount={post.like}
+                liked={post.liked}
+                like={post.like}
+                loveCount={post.love}
+                love={post.love}
+                loved={post.loved}
                 postContent={post.postContent}
                 deletePostBtn={(id) => this.deletePostBtn(post.id)}
-
+                faHeartBtn={(id, love, loved, userNick, theme, like, liked, content) => this.faHeartBtn(post.id, post.love, post.loved, post.userNickname, post.theme, post.like, post.liked, post.postContent)}
+                faThumbsUpBtn={(id, love, loved, userNick, theme, like, liked, content) => this.faThumbsUpBtn(post.id, post.love, post.loved, post.userNickname, post.theme, post.like, post.liked, post.postContent)}
             />
 
         })
@@ -167,10 +222,10 @@ export default class BlogBody extends Component {
                         inputValueHeader={this.state.inputValueHeader}
                         textareaValue={this.state.textareaValue}
                         post={this.post}
-                        sportTheme={()=> this.setState({ inputValueHeader: "Sport"})}
-                        socialTheme={()=>this.setState({ inputValueHeader: "Social"})}
-                        newsTheme={()=>this.setState({ inputValueHeader: "News"})}
-                        politicsTheme={()=>this.setState({ inputValueHeader: "Politics"})}
+                        sportTheme={() => this.setState({ inputValueHeader: "Sport" })}
+                        socialTheme={() => this.setState({ inputValueHeader: "Social" })}
+                        newsTheme={() => this.setState({ inputValueHeader: "News" })}
+                        politicsTheme={() => this.setState({ inputValueHeader: "Politics" })}
                         themeDisplay={this.state.inputValueHeader}
                     />
                 </Modal>
