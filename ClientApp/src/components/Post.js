@@ -30,6 +30,13 @@ export default class Post extends Component {
     }
 
 
+    componentDidMount(){
+        axios.get(`comment/comments/${this.state.post_id}`).then(res => {
+            this.setState({
+                data: res.data.data
+            })
+        })
+    }
 
     // comment list open and get api
     commentList = () => {

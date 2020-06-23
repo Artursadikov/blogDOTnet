@@ -25,6 +25,7 @@
     margin-top: 10px;
     height: 550px;
     border: 2px solid rgba(98, 167, 186, 1);
+    position: relative;
 }
 
 .divPostCreator {
@@ -130,17 +131,19 @@
     right: 20px;
 }
 
-.heartREG:hover {
-    top: 235px;
-    font-size: 220%;
+.likeREG:hover:active {
+    top: 245px;
+    color: blue;
     transition: all 0.5;
 }
 
-.likeREG:hover {
-    top: 235px;
-    font-size: 220%;
+
+.heartREG:hover:active {
+    top: 245px;
+    color: red;
     transition: all 0.5;
 }
+
 
 .commentREG {
     font-size: 200%;
