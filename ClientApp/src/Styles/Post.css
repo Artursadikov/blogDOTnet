@@ -133,6 +133,7 @@
 
 .likeREG:hover:active {
     top: 245px;
+    font-size: 190%;
     color: blue;
     transition: all 0.5;
 }
@@ -140,6 +141,7 @@
 
 .heartREG:hover:active {
     top: 245px;
+    font-size: 190%;
     color: red;
     transition: all 0.5;
 }

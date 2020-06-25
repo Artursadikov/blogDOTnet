@@ -19,7 +19,7 @@ namespace postAPI.Models
         public bool liked { get; set; } = false;
         public bool loved { get; set; } = false;
         public List<Comment> comments { get; set; }
-      
+        public User User { get; set; }
 
     }
 }

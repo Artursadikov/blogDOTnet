@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Blog.Models;
+using Blog.Data;
 
 namespace Blog
 {
@@ -35,22 +36,22 @@ namespace Blog
 
             services.AddControllersWithViews();
             services.AddScoped<IPostService, postService>();
-            // services.AddScoped<IAuthRepo, AuthRepo>();
+            services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddControllersWithViews()
                  .AddNewtonsoftJson(options =>
                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            // {
-            //     options.TokenValidationParameters = new TokenValidationParameters
-            //     {
-            //         ValidateIssuerSigningKey = true,
-            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-            //         .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-            //         ValidateIssuer = false,
-            //         ValidateAudience = false
-            //     };
-            // });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
