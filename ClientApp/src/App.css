@@ -7,8 +7,8 @@
 }
 
 html, body {
-    background-image:  -webkit-linear-gradient(left, #f0f9ffe7 0%, #cbebffed 47%, #a1dbfff1 100%), url('./Pic//star.jpg');
-
+    /* background-image:  -webkit-linear-gradient(left, #f0f9ffe7 0%, #cbebffed 47%, #a1dbfff1 100%), url('./Pic//star.jpg'); */
+    background-color: rgb(233, 233, 233);
     background-size: cover;
 }
 

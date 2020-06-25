@@ -1,6 +1,6 @@
 .post {
-    background-size: cover;
-    background-image: -webkit-linear-gradient(left, #ceeafde7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg');
+    /* background-size: cover; */
+    /* background-image: -webkit-linear-gradient(left, #ceeafde7 0%, #cbebffed 47%, #a1dbfff1 100%), url('../Pic/star.jpg'); */
     width: 96%;
     box-shadow: 10px 12px 17px -9px rgba(98, 167, 186, 1);
     border-radius: 10px;
@@ -9,11 +9,12 @@
     margin-top: 10px;
     margin-bottom: 25px;
     height: 300px;
-    border-top: 1px solid rgba(98, 167, 186, 1);
-    border-left: 1px solid rgba(98, 167, 186, 1);
-    border-bottom: 2px solid rgba(98, 167, 186, 1);
-    border-right: 2px solid rgba(98, 167, 186, 1);
+    border-top: 2px solid rgba(98, 167, 186, 1);
+    border-left: 2px solid rgba(98, 167, 186, 1);
+    border-bottom: 4px solid rgba(98, 167, 186, 1);
+    border-right: 4px solid rgba(98, 167, 186, 1);
     position: relative;
+    background-color: white;
 }
 
 .post2 {
@@ -24,6 +25,7 @@
     margin-right: auto;
     margin-top: 10px;
     height: 550px;
+    background-color: white;
     border: 2px solid rgba(98, 167, 186, 1);
     position: relative;
 }
@@ -51,6 +53,7 @@
     display: block;
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
     border: none;
+    border-radius: 5px;
     padding: 10px;
     background-color: rgb(225, 245, 255);
     overflow: auto;
@@ -76,6 +79,7 @@
     color: darkblue;
     /* text-decoration: underline; */
     margin-left: 10px;
+    margin-top: 2px;
 }
 
 .postHeader {
@@ -86,6 +90,8 @@
     margin-top: 3px;
     text-align: center;
     border-radius: 3px;
+    font-weight: bolder;
+    padding-bottom: 2px;
 }
 
 .divActionBtns {
@@ -138,14 +144,12 @@
     transition: all 0.5;
 }
 
-
 .heartREG:hover:active {
     top: 245px;
     font-size: 190%;
     color: red;
     transition: all 0.5;
 }
-
 
 .commentREG {
     font-size: 200%;
@@ -176,6 +180,7 @@
     box-shadow: inset 10px 12px 11px -11px rgba(98, 167, 186, 1);
     padding-left: 10px;
     /* font-family: 'Piedra', cursive; */
+    background-color: rgb(247, 250, 251);
 }
 
 .commentBtnsPost {

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Blog.Models;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +24,9 @@ namespace Blog.Services.PostService
 
         public async Task<ServiceResponse<List<Post>>> AddNewPost(Post newPost)
         {
+
+         //   TODO: ADD USER ID
+
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             List<Post> dbPost = await _context.Posts.ToListAsync();
             await _context.Posts.AddAsync(newPost);
