@@ -43,9 +43,9 @@ class Signup extends Component {
         }).then((res) => {
             
             //TODO: add login after register
-            if (res.data.sucsses === true) {
-                this.props.history.push('/');
-            }
+            // if (res.data.sucsses === true) {
+            //     this.props.history.push('/');
+            // }
 
             console.log(res)
         }).catch(err => {

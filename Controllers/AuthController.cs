@@ -39,7 +39,7 @@ namespace Blog.Controllers
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
             ServiceResponse<string> response = await _authRepo.Login(
-                userLoginDto.nickName, userLoginDto.password , userLoginDto.email
+                userLoginDto.password , userLoginDto.nickName
             );
 
             if (!response.Sucsses)

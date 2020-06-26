@@ -26,10 +26,10 @@ namespace Blog.Data
         }
 
 
-        public async Task<ServiceResponse<string>> Login(string email, string password, string nickName)
+        public async Task<ServiceResponse<string>> Login(string nickName, string password)
         {
             ServiceResponse<string> response = new ServiceResponse<string>();
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.email.ToLower().Equals(email.ToLower()));
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.nickName.ToLower() == nickName.ToLower());
             if (user == null)
             {
                 response.Sucsses = false;
@@ -72,7 +72,7 @@ namespace Blog.Data
 
         public async Task<bool> UserExists(string email)
         {
-        
+
             if (await _context.Users.AnyAsync(u => u.email.ToLower().Equals(email.ToLower())))
             {
                 return true;
