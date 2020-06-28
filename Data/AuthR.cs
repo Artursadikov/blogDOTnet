@@ -11,14 +11,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using postAPI.Models;
 
+
 namespace Blog.Data
 {
-    public class AuthRepo : IAuthRepo
+     public class AuthR : IAuthRepo
     {
         private readonly PostContext _context;
         private readonly IConfiguration _configuration;
 
-        public AuthRepo(PostContext context, IConfiguration configuration)
+        public AuthR(PostContext context, IConfiguration configuration)
         {
             _configuration = configuration;
             _context = context;
@@ -26,10 +27,10 @@ namespace Blog.Data
         }
 
 
-        public async Task<ServiceResponse<string>> Login(string nickName, string password)
+        public async Task<ServiceResponse<string>> Login(string password, string email)
         {
             ServiceResponse<string> response = new ServiceResponse<string>();
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.nickName.ToLower() == nickName.ToLower());
+            User user = await _context.Users.FirstOrDefaultAsync(u => u.email.ToLower().Equals(email.ToLower()));
             if (user == null)
             {
                 response.Sucsses = false;

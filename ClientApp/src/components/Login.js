@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+
 import '../Styles/Login.css';
 
-export default class Login extends Component {
+class Login extends Component {
 
     state = {
-        nickNameVal: '',
-        passwordVal: ''
-
+        emailVal: '',
+        passwordVal: '',
+        login: false,
+        token: null,
+        emptyForm: false
+       
     }
 
-    nickHandler = (e) => {
+    emailHandler = (e) => {
         this.setState({
-            nickNameVal: e.target.value
+            emailVal: e.target.value
         })
     }
 
@@ -22,27 +27,62 @@ export default class Login extends Component {
         })
     }
 
+    // login btn
     Login = () => {
-        axios.post(`Auth/login`, {
-            nickName: this.state.nickNameVal,
-            password: this.state.passwordVal
-        }).then((res) => {
-            console.log(res)
-           // FIXME: user returns null from backend 
-        }).catch(err => {
-            console.log(err)
-        })
+
+        let email = this.state.emailVal;
+        let pass = this.state.passwordVal;
+
+        if (email === '' || pass === '') {
+            this.setState({
+                emptyForm: true
+            })
+        } else {
+            axios.post(`Auth/login`, {
+                email: this.state.emailVal,
+                password: this.state.passwordVal
+            }).then((res) => {
+
+                localStorage.setItem("login", JSON.stringify({
+                    login: res.data.sucsses,
+                    token: res.data.data,
+                    userEmail: this.state.emailVal
+                }))
+
+                this.setState({
+                    login: res.data.sucsses,
+                    token: res.data.data
+                })
+
+
+            }).then(() => {
+
+                if (this.state.login === true && this.state.token !== null) {
+                    this.props.history.push('/');
+                }
+
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+
     }
 
 
+
+
     render() {
+
+        let empty = this.state.emptyForm;
+
+
         return (
             <div className="container log">
-                <h3 className="loginheader">-Login-</h3>
+                <h3 className="loginheader">{!empty ? '-Login-' : 'You need to fiil the form '}</h3>
                 <div className="row UserLogin">
                     <form>
                         <div className="form-group login">
-                            <input value={this.state.nickNameVal} onChange={(e) => this.nickHandler(e)} type="text" className="form-control" placeholder="Nick Name" aria-describedby="emailHelp" />
+                            <input value={this.state.emailVal} onChange={(e) => this.emailHandler(e)} type="email" className="form-control" placeholder="Email" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group login">
                             <input value={this.state.passwordVal} onChange={(e) => this.passwordHandler(e)} type="password" placeholder="Password" className="form-control" />
@@ -56,3 +96,4 @@ export default class Login extends Component {
         )
     }
 }
+export default withRouter(Login)

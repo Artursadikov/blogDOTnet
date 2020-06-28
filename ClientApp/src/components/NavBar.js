@@ -14,10 +14,24 @@ class NavBar extends Component {
 
     state = {
         navToggle: false,
-        show: false
+        show: false,
+        // login: false,
+        // token: null,
     }
 
 
+            // // get the current user
+            // getUserFromLocalS = () => {
+            //     if (localStorage.getItem("login") !== null) {
+            //         let userCred = JSON.parse(localStorage.getItem("login"));
+            //         this.setState({
+            //             login: userCred.login,
+            //             token: userCred.token
+            //         })
+
+            //     }
+     
+            // }
 
 
 
@@ -30,6 +44,7 @@ class NavBar extends Component {
         this.setState({
             show: true
         })
+
     }
 
     goToBlogBodyBtn = () => {
@@ -56,7 +71,10 @@ class NavBar extends Component {
     }
 
 
+// componentWillMount(){
+//     this.getUserFromLocalS();
 
+// }
 
     render() {
 
@@ -76,17 +94,7 @@ class NavBar extends Component {
                     </div>
 
                 </div>
-                {/* <ul className="navbarUl">
-                    <li className="hamburger">
-                        <FontAwesomeIcon style={{ color: Toggle ? 'red' : 'darkblue' }} onClick={this.navToggler} className="hamburgerBtn" icon={faCircle} />
-                    </li>
-                    <li className="navitem">
-                        <button onClick={this.goToRegisterPage} type="button" style={{ display: Toggle ? 'inline' : null }} className="NavBtns">Registration</button>
-                    </li>
-                    <li className="navitem">
-                        <button onClick={this.goToBlogBodyBtn} style={{ display: Toggle ? 'inline' : null }} type="button" className="NavBtns">Blog Main</button>
-                    </li>
-                </ul> */}
+
                 <NavBarModal
                     show={this.state.show}
                     closeXModalBtn={this.closeBackDrop}

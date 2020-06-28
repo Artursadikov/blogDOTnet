@@ -19,15 +19,43 @@ export default class BlogBody extends Component {
         posts: [],
         isLoading: true,
         showModal: false,
-        inputValue: '',
         inputValueHeader: '',
         textareaValue: '',
         error: false,
         likeCount: 0,
-        loveCount: 0
+        loveCount: 0,
+        login: false,
+        token: null,
+        User_id: null,
+        nickName: '',
+        email: ''
+
+    }
+
+    // get the current user
+    getUserFromLocalS = () => {
+        if (localStorage.getItem("login") !== null) {
+            let userCred = JSON.parse(localStorage.getItem("login"));
+            this.setState({
+                login: userCred.login,
+                token: userCred.token
+            })
+
+            axios.get(`Auth/${userCred.userEmail}`).then(res => {
+                this.setState({
+                    User_id: res.data[0].id,
+                    nickName: res.data[0].nickName,
+                    email: res.data[0].email
+                })
+             
+            })
+
+        }
+
     }
 
 
+    // get all posts
     getApi = () => {
         axios.get('/api/Post').then(res => {
 
@@ -74,13 +102,6 @@ export default class BlogBody extends Component {
 
 
     //input value handler
-    inputNickVal = (e) => {
-        let val = e.target.value;
-        this.setState({
-            inputValue: val
-        })
-    }
-    //input value handler
     inputHeader = (e) => {
         let val = e.target.value;
         this.setState({
@@ -102,8 +123,9 @@ export default class BlogBody extends Component {
 
         axios.post('api/Post', {
             postContent: this.state.textareaValue,
-            userNickname: this.state.inputValue,
-            theme: this.state.inputValueHeader
+            userNickname: this.state.nickName,
+            theme: this.state.inputValueHeader,
+            user: { Id: this.state.User_id }
         }).then(() => {
             this.setState({
                 inputValue: '',
@@ -123,15 +145,14 @@ export default class BlogBody extends Component {
                 console.log(e);
             })
 
-
-
     }
 
-    
+
 
     async componentDidMount() {
         await this.getApi();
-
+        await this.getUserFromLocalS();
+       
     }
 
 
@@ -216,7 +237,7 @@ export default class BlogBody extends Component {
                 <Modal show={this.state.showModal}>
                     <NewPostCreateModal
                         cancelPostbtn={this.cancelPostbtn}
-                        onChengeinputNickVal={(e) => this.inputNickVal(e)}
+                        userNickName={this.state.nickName}
                         onChengeinputHeader={(e) => this.inputHeader(e)}
                         onChengetextareaVal={(e) => this.textareaVal(e)}
                         inputValue={this.state.inputValue}
@@ -234,8 +255,8 @@ export default class BlogBody extends Component {
                     <div className="blogSideBar col-xs-12 col-sm-5 col-lg-4">
                         <div className="profileArea">
                             <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag-blog-body" />
-                            <h3 className="sideBarUserName">Nickname</h3>
-                            <h6 className="sideBarUserEmail">User Email</h6>
+                            <h3 className="sideBarUserName">{this.state.nickName}</h3>
+                            <h6 className="sideBarUserEmail">{this.state.email}</h6>
                             <div className="profileBtnsEditAndInfo" >
                                 <button className="editProfileBtn">Edit</button>
                                 <button className="editProfileBtn">My Posts Info</button>

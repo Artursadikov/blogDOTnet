@@ -26,16 +26,45 @@ export default class Post extends Component {
         singleCommentData: [],
         editCommentMode: false,
         post_id: this.props.postId,
+        login: false,
+        token: null,
+        User_id: null,
+        nickName: '',
+        email: ''
 
     }
 
 
-    componentDidMount(){
+    // get the current user
+    getUserFromLocalS = () => {
+        if (localStorage.getItem("login") !== null) {
+            let userCred = JSON.parse(localStorage.getItem("login"));
+
+            axios.get(`Auth/${userCred.userEmail}`).then(res => {
+                this.setState({
+                    User_id: res.data[0].id,
+                    nickName: res.data[0].nickName,
+                    email: res.data[0].email,
+                    login: userCred.login,
+                    token: userCred.token
+                })
+
+            })
+
+        }
+
+    }
+
+
+    componentDidMount() {
         axios.get(`comment/comments/${this.state.post_id}`).then(res => {
             this.setState({
                 data: res.data.data
             })
         })
+
+
+        this.getUserFromLocalS();
     }
 
     // comment list open and get api
@@ -85,7 +114,9 @@ export default class Post extends Component {
 
         axios.post('Comment', {
             content: this.state.commentVal,
-            post: { Id: this.state.post_id }
+            post: { Id: this.state.post_id },
+            userNameCommented: this.state.nickName,
+            user: { Id: this.state.user_id }
         }).then(() => {
             this.setState({
                 commentVal: ''
@@ -153,6 +184,9 @@ export default class Post extends Component {
     render() {
 
 
+        //FIXME: login null ?????? here Not null
+        console.log(this.state.login, this.state.token)
+
         // comments list
         let comments = this.state.data.map((item, index) => {
 
@@ -160,6 +194,7 @@ export default class Post extends Component {
                 Comment={item.content}
                 key={item.id}
                 postId={this.props.postId}
+                userNameCommented={item.userNameCommented}
                 editComment={(id) => this.editComment(item.id)}
                 deleteCommentBtn={(id) => this.deleteCommentBtn(item.id)} />
         });

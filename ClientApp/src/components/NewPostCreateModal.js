@@ -34,7 +34,7 @@ class NewPostCreateModal extends Component {
                         : <p className="newPostHeader">Create Your Post</p>
                 }
 
-                <input value={this.props.inputValue} onChange={this.props.onChengeinputNickVal} type="text" placeholder="Enter Your Nick-Name" className="createPostInput" />
+                <h2 style={{ textAlign: 'center', fontWeight: "bolder" }}>{this.props.userNickName}</h2>
                 {
                     !this.state.openInputTheme ?
                         <div className="themeBtnsDiv">
@@ -60,7 +60,7 @@ class NewPostCreateModal extends Component {
                     }
 
                     {
-                        this.props.inputValue === '' || this.props.textareaValue
+                         this.props.textareaValue
                             === "" || this.props.inputValueHeader === '' ?
                             <button disabled style={{ opacity: '0.5' }} className="createPostPostBtn">Disabled</button>
                             :
@@ -69,11 +69,11 @@ class NewPostCreateModal extends Component {
 
                 </div>
                 {!this.state.openInputTheme ?
-                     <h1 className="themeDisplay">{this.props.themeDisplay}</h1>
-                     :
-                     null
+                    <h1 className="themeDisplay">{this.props.themeDisplay}</h1>
+                    :
+                    null
                 }
-               
+
             </div>
         )
     }

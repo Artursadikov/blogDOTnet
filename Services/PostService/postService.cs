@@ -8,14 +8,14 @@ using postAPI.Models;
 
 namespace Blog.Services.PostService
 {
-    public class postService : IPostService
+    public class PostService : IPostService
     {
 
 
         private readonly PostContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public postService(PostContext context, IHttpContextAccessor httpContextAccessor)
+        public PostService(PostContext context, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
@@ -25,10 +25,11 @@ namespace Blog.Services.PostService
         public async Task<ServiceResponse<List<Post>>> AddNewPost(Post newPost)
         {
 
-         //   TODO: ADD USER ID
+            //   TODO: ADD USER ID
 
             ServiceResponse<List<Post>> serviceResponse = new ServiceResponse<List<Post>>();
             List<Post> dbPost = await _context.Posts.ToListAsync();
+            newPost.User = await _context.Users.FindAsync(newPost.User.Id);
             await _context.Posts.AddAsync(newPost);
             await _context.SaveChangesAsync();
             serviceResponse.Data = dbPost;
@@ -41,7 +42,7 @@ namespace Blog.Services.PostService
             try
             {
                 Post post = await _context.Posts.Include(c => c.comments).FirstOrDefaultAsync(c => c.Id == id);
-              
+
                 if (post != null)
                 {
                     _context.Posts.Remove(post);

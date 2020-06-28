@@ -1,20 +1,20 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using postAPI.Models;
 using Blog.Services;
+using System;  
+using postAPI.Models;
 using Blog.Services.PostService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using Blog.Models;
+
 using Blog.Data;
 
 namespace Blog
@@ -35,8 +35,8 @@ namespace Blog
 
 
             services.AddControllersWithViews();
-            services.AddScoped<IPostService, postService>();
-            services.AddScoped<IAuthRepo, AuthRepo>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IAuthRepo, Blog.Data.AuthR>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddControllersWithViews()
                  .AddNewtonsoftJson(options =>
@@ -84,10 +84,10 @@ namespace Blog
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseRouting();
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
