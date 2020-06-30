@@ -6,8 +6,9 @@ import axios from 'axios';
 import Loader from '../Loader/Loader';
 import Modal from '../Modal/Modal';
 import NewPostCreateModal from './NewPostCreateModal';
-
-
+import Wrapper from '../hoc/Wrapper';
+import AdminModal from '../Modal/AdminModal';
+import Admin from './Admin';
 
 
 
@@ -28,8 +29,10 @@ export default class BlogBody extends Component {
         token: null,
         User_id: null,
         nickName: '',
-        email: ''
-
+        email: '',
+        editPriofileMode: false,
+        editNickInputValue: '',
+        showAdminModal: false
     }
 
     // get the current user
@@ -47,7 +50,7 @@ export default class BlogBody extends Component {
                     nickName: res.data[0].nickName,
                     email: res.data[0].email
                 })
-             
+
             })
 
         }
@@ -152,7 +155,7 @@ export default class BlogBody extends Component {
     async componentDidMount() {
         await this.getApi();
         await this.getUserFromLocalS();
-       
+
     }
 
 
@@ -203,6 +206,42 @@ export default class BlogBody extends Component {
 
     }
 
+    //edit user profile - nickname // Todo: change pic 
+    editPriofile = () => {
+
+        this.setState({
+            editPriofileMode: !this.state.editPriofileMode
+        })
+
+    }
+
+    // send changes PUT user
+    editPriofileChanges = () => {
+        axios.put(`Auth/update/${this.state.User_id}`, {
+            id: this.state.User_id,
+            nickName: this.state.editNickInputValue
+        }).then(() => {
+            this.getUserFromLocalS();
+            this.setState({
+                editPriofileMode: !this.state.editPriofileMode
+            })
+        })
+
+    }
+
+    editNickValHandleChanged = (e) => {
+        this.setState({
+            editNickInputValue: e.target.value
+        })
+    }
+
+    // Open admin Modal
+    openAdminManager = () => {
+        this.setState({
+            showAdminModal: !this.state.showAdminModal
+        })
+    }
+
 
     render() {
 
@@ -240,7 +279,6 @@ export default class BlogBody extends Component {
                         userNickName={this.state.nickName}
                         onChengeinputHeader={(e) => this.inputHeader(e)}
                         onChengetextareaVal={(e) => this.textareaVal(e)}
-                        inputValue={this.state.inputValue}
                         inputValueHeader={this.state.inputValueHeader}
                         textareaValue={this.state.textareaValue}
                         post={this.post}
@@ -252,16 +290,46 @@ export default class BlogBody extends Component {
                     />
                 </Modal>
                 <div className="row blogBody">
+                    <AdminModal showAdminModal={this.state.showAdminModal}>
+                       <Admin/>
+                    </AdminModal>
                     <div className="blogSideBar col-xs-12 col-sm-5 col-lg-4">
                         <div className="profileArea">
-                            <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag-blog-body" />
-                            <h3 className="sideBarUserName">{this.state.nickName}</h3>
-                            <h6 className="sideBarUserEmail">{this.state.email}</h6>
+                            {
+                                this.state.editPriofileMode ?
+                                    <Wrapper>
+                                        <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag-blog-body" />
+                                        <button className="editAvatarBtn">Edit Avatar</button>
+                                        <input value={this.state.editNickInputValue} onChange={(e) => this.editNickValHandleChanged(e)} className="editNickInput" placeholder={this.state.nickName} />
+                                    </Wrapper> :
+                                    <Wrapper>
+                                        <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag-blog-body" />
+                                        <h3 className="sideBarUserName">{!this.state.login ? "Anonymous" : this.state.nickName}</h3>
+                                        <h6 className="sideBarUserEmail">{!this.state.login ? "Anonymous Mode" : this.state.email}</h6>
+                                    </Wrapper>
+                            }
+                            {
+                                this.state.email === "admin@admin" ?
+                                    <button onClick={this.openAdminManager} className="AdminEdit">Admin Edit</button> :
+                                    null
+                            }
                             <div className="profileBtnsEditAndInfo" >
-                                <button className="editProfileBtn">Edit</button>
-                                <button className="editProfileBtn">My Posts Info</button>
+                                {
+                                    !this.state.login ? <small style={{ textAlign: "center", color: "red" }}>In Anonymous Mode You Allow Just Read Post & Comment</small> :
+                                        <Wrapper>
+                                            {
+                                                this.state.editPriofileMode ?
+                                                    <button onClick={this.editPriofileChanges} className="editProfileBtn">Change</button>
+                                                    :
+                                                    <button onClick={this.editPriofile} className="editProfileBtn">Edit Profile</button>
+                                            }
+
+                                            <button className="editProfileBtn">My Posts</button>
+                                        </Wrapper>
+                                }
+
                             </div>
-                            <button onClick={this.CreateANewPostBtn} className="createNewPostBtn">Add A New Post</button>
+                            <button disabled={!this.state.login ? true : false} onClick={this.CreateANewPostBtn} className="createNewPostBtn">{!this.state.login ? "Login To Post" : "Add A New Post"}</button>
                         </div>
                     </div>
                     <div className="blogMain col-xs-12 col-sm-7 col-lg-8">

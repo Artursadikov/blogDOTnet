@@ -12,7 +12,9 @@ class Signup extends Component {
         emailVal: '',
         passwordVal: '',
         nicknameVal: '',
-        error: false
+        error: false,
+        login: false,
+        token: null
 
     }
 
@@ -34,26 +36,41 @@ class Signup extends Component {
         })
     }
 
+
+    //Registration
     SubmitRegistration = () => {
 
         axios.post(`Auth/register`, {
             email: this.state.emailVal,
             password: this.state.passwordVal,
             nickname: this.state.nicknameVal
-        }).then((res) => {
-            
-            //TODO: add login after register
-            // if (res.data.sucsses === true) {
-            //     this.props.history.push('/');
-            // }
+        }).then(() => {
 
-            console.log(res)
+
+            axios.post(`Auth/login`, {
+                email: this.state.emailVal,
+                password: this.state.passwordVal
+            }).then((res) => {
+                localStorage.setItem("login", JSON.stringify({
+                    login: res.data.sucsses,
+                    token: res.data.data,
+                    userEmail: this.state.emailVal
+                }))
+                this.setState({
+                    login: res.data.sucsses,
+                    token: res.data.data
+                })
+
+                if (this.state.login === true) {
+                    this.props.history.push('/');
+                }
+            })
+
         }).catch(err => {
             this.setState({
                 error: true
-
             })
-
+            console.log(err)
         })
     }
 
@@ -67,7 +84,7 @@ class Signup extends Component {
 
         return (
 
-            <div className="container login">
+            <div className="container login" >
                 {
                     this.state.error ?
                         <h3 style={{ textAlign: 'center', color: 'red' }}>This Email is Already Exist</h3>
@@ -75,7 +92,7 @@ class Signup extends Component {
                         <img src={userDefaulfLogo} alt="UserImg" className="row user-pictuar-tag" />
                 }
 
-                <div className="row formUserLogin">
+                < div className="row formUserLogin" >
                     <form>
                         <div className="form-group">
                             <input value={nick} onChange={(e) => this.nickNameHandler(e)} type="text" placeholder="Nickname" className="form-control" />
@@ -95,7 +112,7 @@ class Signup extends Component {
                         </div>
                     </form>
                 </div>
-            </div>
+            </div >
         )
     }
 }

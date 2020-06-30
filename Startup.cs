@@ -36,7 +36,7 @@ namespace Blog
 
             services.AddControllersWithViews();
             services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IAuthRepo, Blog.Data.AuthR>();
+            services.AddScoped<IAuthRepo, AuthR>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddControllersWithViews()
                  .AddNewtonsoftJson(options =>
@@ -84,8 +84,8 @@ namespace Blog
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
             app.UseRouting();
 
 

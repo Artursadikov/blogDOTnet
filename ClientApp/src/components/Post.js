@@ -57,6 +57,7 @@ export default class Post extends Component {
 
 
     componentDidMount() {
+        //get comments by post id
         axios.get(`comment/comments/${this.state.post_id}`).then(res => {
             this.setState({
                 data: res.data.data
@@ -184,9 +185,6 @@ export default class Post extends Component {
     render() {
 
 
-        //FIXME: login null ?????? here Not null
-        console.log(this.state.login, this.state.token)
-
         // comments list
         let comments = this.state.data.map((item, index) => {
 
@@ -211,7 +209,11 @@ export default class Post extends Component {
                 <div className="divPostCreator">
                     <small className="PostCreatorUserName">{this.props.userNickname}</small>
                     <p className="postHeader">{this.props.theme}</p>
-                    <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
+                    {
+                        !this.state.login ? null :
+                            <button onClick={this.props.deletePostBtn} className="postDelBtn">Delete</button>
+                    }
+
                 </div>
                 <div className="divPostContent">
                     <p className="commentTextarea">{this.props.postContent}</p>

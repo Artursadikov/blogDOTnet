@@ -37,6 +37,7 @@ class Login extends Component {
             this.setState({
                 emptyForm: true
             })
+            
         } else {
             axios.post(`Auth/login`, {
                 email: this.state.emailVal,

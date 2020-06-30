@@ -3,33 +3,19 @@ import '../Styles/NavModalContent.css';
 import { withRouter } from 'react-router-dom';
 
 
+
 class NavModalContent extends Component {
 
-    // state = {
-    //     login: false,
-    //     token: null
-    // }
+
 
     logOut = () => {
         localStorage.clear();
         this.props.history.push('/Register');
     }
 
-    // componentWillMount() {
 
-    //     if (localStorage.getItem("login") !== null) {
-    //         let userCred = JSON.parse(localStorage.getItem("login"));
-
-    //         this.setState({
-    //             login: userCred.login,
-    //             token: userCred.token
-    //         })
-    //     }
-
-    // }
 
     render() {
-
 
 
 

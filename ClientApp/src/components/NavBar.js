@@ -14,24 +14,11 @@ class NavBar extends Component {
 
     state = {
         navToggle: false,
-        show: false,
-        // login: false,
-        // token: null,
+        show: false
     }
 
 
-            // // get the current user
-            // getUserFromLocalS = () => {
-            //     if (localStorage.getItem("login") !== null) {
-            //         let userCred = JSON.parse(localStorage.getItem("login"));
-            //         this.setState({
-            //             login: userCred.login,
-            //             token: userCred.token
-            //         })
 
-            //     }
-     
-            // }
 
 
 
@@ -71,10 +58,7 @@ class NavBar extends Component {
     }
 
 
-// componentWillMount(){
-//     this.getUserFromLocalS();
 
-// }
 
     render() {
 
