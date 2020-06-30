@@ -68,6 +68,17 @@ namespace Blog.Controllers
         }
 
 
+        //ADMIN ONLY
+        [HttpGet("AllUsers")]
+        public async Task<List<User>> GetAllUsers()
+        {
+
+            List<User> user = await _context.Users.ToListAsync();
+
+            return user;
+        }
+
+        //ADMIN ONLY
         // Delete user by id 
         [HttpDelete("{id}")]
         public async Task<ServiceResponse<List<User>>> Delete(int id)
@@ -102,7 +113,7 @@ namespace Blog.Controllers
         }
 
 
-  
+
         [HttpPut("update/{id}")]
         public async Task<ServiceResponse<User>> UpdateUser(User UpdatedUser, int id)
         {

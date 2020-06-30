@@ -31,7 +31,7 @@ class NewPostCreateModal extends Component {
             <div className="newPostContainer">
                 {
                     this.props.error ? <p className="newPostHeader">Oops Something Went Wrong...</p>
-                        : <p className="newPostHeader">Create Your Post</p>
+                        : <h1 className="newPostHeader">--Create Your Post--</h1>
                 }
 
                 <h2 style={{ textAlign: 'center', fontWeight: "bolder" }}>{this.props.userNickName}</h2>
@@ -50,7 +50,7 @@ class NewPostCreateModal extends Component {
 
                 }
 
-                <textarea value={this.props.textareaValue} onChange={this.props.onChengetextareaVal} rows="6" cols="40" name="comment" className="createPostTextarea" placeholder="Post..." />
+                <textarea value={this.props.textareaValue} onChange={this.props.onChengetextareaVal} rows="6" cols="40" name="comment" className="createPostTextarea" placeholder="You`r Story..." />
                 <div className="createPostBtnDiv">
                     {
                         !this.state.openInputTheme ?

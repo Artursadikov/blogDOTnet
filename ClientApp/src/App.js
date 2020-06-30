@@ -9,7 +9,8 @@ import Register from "./components/Register";
 
 import './App.css';
 
-
+//TODO: if not user anonymous icon Comment component
+//add avatar pic
 
 
 export default class App extends Component {

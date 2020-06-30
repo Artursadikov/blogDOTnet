@@ -4,7 +4,11 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class Comment extends Component {
+
+
+    
     render() {
+
         return (
             <div className="LIcommentList">
                 <li className={this.props.class}> 

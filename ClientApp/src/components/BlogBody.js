@@ -240,6 +240,7 @@ export default class BlogBody extends Component {
         this.setState({
             showAdminModal: !this.state.showAdminModal
         })
+      
     }
 
 
@@ -291,7 +292,9 @@ export default class BlogBody extends Component {
                 </Modal>
                 <div className="row blogBody">
                     <AdminModal showAdminModal={this.state.showAdminModal}>
-                       <Admin/>
+                        <Admin
+                            closeModal={this.openAdminManager}
+                        />
                     </AdminModal>
                     <div className="blogSideBar col-xs-12 col-sm-5 col-lg-4">
                         <div className="profileArea">
